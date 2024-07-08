@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { ForecastComponent } from './features/forecast/forecast.component';
 import { TeacherComponent } from './features/teacher/teacher.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterTeacherComponent } from './features/register-teacher/register-teacher.component';
+import { RegisterTeacherComponent } from './features/teacher/pages/register-teacher/register-teacher.component';
 import { routes } from './app.routes';
 import { HomeComponent } from './features/home/home.component';
+import { AddressComponent } from './features/teacher/components/address/address.component';
 
 
 
@@ -18,6 +19,7 @@ import { HomeComponent } from './features/home/home.component';
     ForecastComponent,
     TeacherComponent,
     RegisterTeacherComponent,
+    AddressComponent,
     AppComponent,
     HomeComponent
   ],

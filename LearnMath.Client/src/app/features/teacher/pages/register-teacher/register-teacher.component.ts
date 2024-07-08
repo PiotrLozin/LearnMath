@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TeacherModel } from '../teacher/teacher.model';
-import { RegisterTeacherService } from './service/register-teacher.service';
-import { TeacherService } from '../teacher/services/teacher.service';
+import { TeacherModel } from '../../teacher.model';
+import { RegisterTeacherService } from '../../../register-teacher/service/register-teacher.service';
+import { TeacherService } from '../../services/teacher.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -10,8 +10,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: './register-teacher.component.html',
   styleUrl: './register-teacher.component.scss'
 })
+
 export class RegisterTeacherComponent{
 
+  constructor(
+    private httpClient: HttpClient,
+    private formBuilder: FormBuilder,
+    private teacherService: TeacherService
+  ){}
+  
   teacherForm = this.formBuilder.group({
     firstName: ['Piotr', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
     lastName: ['Lozo', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -19,7 +26,13 @@ export class RegisterTeacherComponent{
     email: ['piotrloz', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
     gender: [null, Validators.required],
     score: ['123', Validators.required],
-    numberOfOpinions: ['123', Validators.required]
+    numberOfOpinions: ['123', Validators.required],
+    addressForm : this.formBuilder.group({
+      street: ['', Validators.compose([Validators.required])],
+      city: ['', Validators.compose([Validators.required])],
+      country: ['', Validators.compose([Validators.required])],
+      postCode: ['', Validators.compose([Validators.required])]
+    })
   })
   
   onSubmit() {
@@ -40,10 +53,4 @@ export class RegisterTeacherComponent{
     return 
   }
   
-  constructor(
-    private httpClient: HttpClient,
-    private formBuilder: FormBuilder,
-    private teacherService: TeacherService
-  ){}
-
 }
