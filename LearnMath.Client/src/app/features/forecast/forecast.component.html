@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">TemperatureC</th>
+        <th scope="col">TemperatureF</th>
+        <th scope="col">Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of items; track item){
+      <tr>
+        <td>{{item.date}}</td>
+        <td>{{item.temperatureF}}</td>
+        <td>{{item.temperatureC}}</td>
+        <td>{{item.summary}}</td>
+      </tr>
+    }
+    </tbody>
+  </table>
