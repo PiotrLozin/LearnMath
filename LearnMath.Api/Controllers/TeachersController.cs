@@ -1,4 +1,5 @@
 ﻿using LearnMath.Application.Teachers;
+using LearnMath.Application.Teachers.Requests;
 using LearnMath.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -33,8 +34,15 @@ namespace LearnMath.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(List<WeatherForecast>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> SaveTeacher([FromBody] TeacherDto teacher)
+        public async Task<IActionResult> SaveTeacher([FromBody] CreateTeacherRequest teacher)
         {
+            Address address = new Address(
+                Guid.Empty,
+                teacher.AddressForm.Street,
+                teacher.AddressForm.City,
+                teacher.AddressForm.Country,
+                teacher.AddressForm.PostCode);
+
             Teacher teacherEntity = new Teacher(
                 Guid.Empty,
                 teacher.FirstName,
@@ -44,7 +52,7 @@ namespace LearnMath.Api.Controllers
                 teacher.Gender,
                 teacher.Score,
                 teacher.NumberOfOpinions,
-                new Address(Guid.Empty, "street", "city", "country", "postCode"));
+                address);
 
             var result = await _teacherRepository.Save(teacherEntity);
 
