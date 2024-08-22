@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeacherModel } from './teacher.model';
 import { TeacherService } from './services/teacher.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher',
@@ -10,19 +10,36 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class TeacherComponent implements OnInit{
-  items: TeacherModel[] = [];
+  teachers: TeacherModel[] = [];
 
   constructor(
     private teacherService: TeacherService,
+    private router: Router,
     private route: ActivatedRoute
   ){}
 
   ngOnInit(): void {
-    this.teacherService.getTeachers().subscribe((forecasts: any) => {
-      this.items = [...forecasts];
-    });
+    this.loadTeachers();
     this.route.params.subscribe(params => {
       console.log(params);
+    });
+  }
+
+  onDelete(id: number): void {
+    this.teacherService.deleteTeacher(id).subscribe(() => {
+      this.loadTeachers();
+    });
+
+  }
+
+  onEdit(id: number): void {
+    this.router.navigate(["app-edit-teacher", id])
+
+  }
+
+  private loadTeachers(): void {
+    this.teacherService.getTeachers().subscribe((teachers: any) => {
+      this.teachers = [...teachers];
     });
   }
 }

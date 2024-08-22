@@ -19,6 +19,18 @@ namespace LearnMath.Infrastructure.Teachers
             _context = context;
         }
 
+        public async Task<int> Delete(Teacher entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            _context.Teachers.Remove(entity);
+            var result = await _context.SaveChangesAsync();
+            return result;
+        }
+
         public async Task<List<Teacher>> GetAll()
         {
 
@@ -27,9 +39,28 @@ namespace LearnMath.Infrastructure.Teachers
             return teachers;
         }
 
+        public async Task<Teacher?> GetById(int id)
+        {
+            var teacher = await _context.Teachers.Include(x => x.Address).SingleOrDefaultAsync(x => x.Id == id);
+
+            return teacher;
+        }
+
         public async Task<int> Save(Teacher entity)
         {
             _context.Teachers.Add(entity);
+            var result = await _context.SaveChangesAsync();
+            return result;
+        }
+
+        public async Task<int> Update(Teacher entity)
+        {
+            var teacher = await _context.Teachers.FindAsync(entity.Id);
+            if (teacher == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             var result = await _context.SaveChangesAsync();
             return result;
         }

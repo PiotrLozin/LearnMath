@@ -11,6 +11,7 @@ import { RegisterTeacherComponent } from './features/teacher/pages/register-teac
 import { routes } from './app.routes';
 import { HomeComponent } from './features/home/home.component';
 import { AddressComponent } from './features/teacher/components/address/address.component';
+import { EditTeacherComponent } from './features/teacher/pages/edit-teacher/edit-teacher.component';
 
 
 
@@ -19,6 +20,7 @@ import { AddressComponent } from './features/teacher/components/address/address.
     ForecastComponent,
     TeacherComponent,
     RegisterTeacherComponent,
+    EditTeacherComponent,
     AddressComponent,
     AppComponent,
     HomeComponent

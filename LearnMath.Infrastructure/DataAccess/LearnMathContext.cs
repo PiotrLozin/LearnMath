@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal;
 
 namespace LearnMath.Infrastructure.DataAccess
 {
@@ -14,6 +15,19 @@ namespace LearnMath.Infrastructure.DataAccess
         {
             optionsBuilder.UseInMemoryDatabase("LearnMathDb");
             base.OnConfiguring(optionsBuilder);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Teacher>(teacher =>
+            {
+                var id = teacher.Property(e => e.Id).ValueGeneratedOnAdd();
+                if (Database.IsInMemory())
+                {
+                    //id.HasValueGenerator<InMemoryIntegerValueGenerator<int>>();
+                }
+            });
         }
 
         public DbSet<Teacher> Teachers { get; set; }

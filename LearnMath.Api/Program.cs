@@ -1,5 +1,4 @@
-using LearnMath.Application.Services.Implementations;
-using LearnMath.Application.Services.Interfaces;
+using LearnMath.Application;
 using LearnMath.Application.Students;
 using LearnMath.Application.Teachers;
 using LearnMath.Infrastructure.DataAccess;
@@ -17,15 +16,25 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<LearnMathContext>();
 
-builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+
+builder.Services.AddMediatR(cfg => 
+{
+    cfg.RegisterServicesFromAssembly(typeof(IApplicationMarker).Assembly);
+});
+
 builder.Services.AddCors(options =>
  {
      options.AddPolicy(name: "AllPolicy",
                        policy =>
                        {
-                           policy.WithOrigins("http://localhost:4200").AllowAnyHeader();
+                           //policy.WithOrigins("http://localhost:4200").AllowAnyHeader();
+                           policy.AllowAnyOrigin().WithMethods(
+                               HttpMethod.Get.Method,
+                               HttpMethod.Put.Method,
+                               HttpMethod.Post.Method,
+                               HttpMethod.Delete.Method).AllowAnyHeader();
                        });
  });
 

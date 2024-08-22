@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 using LearnMath.Domain.Enums;
@@ -6,7 +7,8 @@ namespace LearnMath.Domain
 {
     public class Teacher
     {
-        public Guid Id { get; set; }
+        [Key]
+        public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Profession { get; set; }
@@ -20,7 +22,7 @@ namespace LearnMath.Domain
         public Teacher() { }
 
         public Teacher(
-            Guid id,
+            int id,
             string firstName,
             string lastName,
             string profession,

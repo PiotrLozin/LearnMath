@@ -18,7 +18,7 @@ namespace LearnMath.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(List<WeatherForecast>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(List<Student>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Get()
         {
@@ -32,7 +32,7 @@ namespace LearnMath.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(List<WeatherForecast>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(List<Student>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> SaveStudent([FromBody] StudentDto student)
         {

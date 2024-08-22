@@ -1,4 +1,7 @@
+import { AddressModel } from "./address.model";
+
 export interface TeacherModel{
+    id: number;
     firstName: string;
     lastName: string;
     profession: string;
@@ -6,4 +9,5 @@ export interface TeacherModel{
     gender: boolean;
     score: number;
     numberOfOpinions: number;
+    address: AddressModel
 }
