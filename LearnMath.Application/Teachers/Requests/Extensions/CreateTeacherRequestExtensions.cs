@@ -1,5 +1,6 @@
 ﻿using LearnMath.Application.Addresses;
 using LearnMath.Domain;
+using LearnMath.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,11 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
                 throw new ArgumentNullException(nameof(request));
             }
 
+            if (!Enum.IsDefined(typeof(Gender), request.Gender))
+            {
+                throw new ArgumentException($"Invalid gender value: {request.Gender}", nameof(request.Gender));
+            }
+
             Teacher teacherEntity = new Teacher(
                 default,
                 request.FirstName,
@@ -28,7 +34,7 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
                 request.Gender,
                 request.Score,
                 request.NumberOfOpinions,
-                request.AddressForm.MapToAddress());
+                request.Address.MapToAddress());
 
             return teacherEntity;
         }
@@ -43,6 +49,17 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
                 request.PostCode);
 
             return address;
+        }
+
+        public static bool TryParseEnum<TEnum>(this int enumValue, out TEnum retVal)
+        {
+            retVal = default(TEnum);
+            bool success = Gender.IsDefined(typeof(TEnum), enumValue);
+            if (success)
+            {
+                retVal = (TEnum)Gender.ToObject(typeof(TEnum), enumValue);
+            }
+            return success;
         }
     }
 }

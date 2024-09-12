@@ -28,10 +28,6 @@ namespace LearnMath.Api.Controllers
         {
             var query = new GetAllTeachersQuery();
             var response = await _mediator.Send(query);
-            if (!response.Teachers.Any())
-            {
-                return NotFound();
-            }
 
             return Ok(response.Teachers);
         }

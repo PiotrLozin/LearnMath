@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TeacherModel } from '../../teacher.model';
+import { TeacherModel, TeacherRequestModel } from '../../teacher.model';
 import { RegisterTeacherService } from '../../../register-teacher/service/register-teacher.service';
 import { TeacherService } from '../../services/teacher.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -24,7 +24,7 @@ export class RegisterTeacherComponent{
     lastName: ['Lozo', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
     profession: ['Math', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
     email: ['piotrloz', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-    gender: [null, Validators.required],
+    gender: ['', Validators.required],
     score: ['123', Validators.required],
     numberOfOpinions: ['123', Validators.required],
     addressForm : this.formBuilder.group({
@@ -37,20 +37,38 @@ export class RegisterTeacherComponent{
   
   onSubmit() {
     if (this.teacherForm.invalid)
-      console.error(this.teacherForm.value);
+      console.error('Form is invalid', this.teacherForm.value);
 
-    console.warn(this.teacherForm.value);
+    console.warn('Form data:', this.teacherForm.value);
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let resource = JSON.stringify(this.teacherForm.value);
+    let resource = this.mapToRequest(this.teacherForm.value);
     this.httpClient.post("http://localhost:5074/teachers", resource, { headers }).subscribe(
       res => {
-        console.log(res);
+        console.log('Server response', res);
       },
       err => {
         console.log('Error occurred', err);
       });;
     return 
+  }
+
+  mapToRequest(teacherForm: any): TeacherRequestModel {
+    return {
+      firstName: teacherForm.firstName,
+      lastName: teacherForm.lastName,
+      profession: teacherForm.profession,
+      email: teacherForm.email,
+      gender: parseInt(teacherForm.gender),
+      score: parseInt(teacherForm.score),
+      numberOfOpinions: parseInt(teacherForm.numberOfOpinions),
+      address: {
+        street: teacherForm.addressForm.street,
+        city: teacherForm.addressForm.city,
+        country: teacherForm.addressForm.country,
+        postCode: teacherForm.addressForm. postCode
+      }
+    }
   }
   
 }

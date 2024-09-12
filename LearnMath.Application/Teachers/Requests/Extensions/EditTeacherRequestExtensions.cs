@@ -1,5 +1,6 @@
 ﻿using LearnMath.Application.Addresses;
 using LearnMath.Domain;
+using LearnMath.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,11 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
             if (request == null) 
             {
                 throw new ArgumentNullException(nameof(request));
+            }
+
+            if (!Enum.IsDefined(typeof(Gender), request.Gender))
+            {
+                throw new ArgumentException($"Invalid gender value: {request.Gender}", nameof(request.Gender));
             }
 
             teacher.FirstName = request.FirstName;
