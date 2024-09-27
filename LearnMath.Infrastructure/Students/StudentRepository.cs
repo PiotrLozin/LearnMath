@@ -1,4 +1,5 @@
 ﻿using LearnMath.Application.Students;
+using LearnMath.Application.Teachers;
 using LearnMath.Domain;
 using LearnMath.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LearnMath.Infrastructure.Students
 {
-    public class StudentRepository : IStudentRepository
+    public class StudentRepository : IUserRepository
     {
         private readonly LearnMathContext _context;
 
@@ -19,18 +20,39 @@ namespace LearnMath.Infrastructure.Students
             _context = context;
         }
 
-        public async Task<List<Student>> GetAll()
+        public Task<int> Delete(User entity)
         {
-            var students = await _context.Students.Include(x => x.Address).ToListAsync();
-
-            return students;
+            throw new NotImplementedException();
         }
 
-        public async Task<int> Save(Student entity)
+        public async Task<List<User>> GetAll()
         {
-            _context.Students.Add(entity);
+
+            var users = await _context.Users.Include(x => x.Address).ToListAsync();
+
+            return users;
+        }
+
+        public Task<User?> GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<int> Save(User entity)
+        {
+            _context.Users.Add(entity);
             var result = await _context.SaveChangesAsync();
             return result;
+        }
+
+        public Task<int> Update(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<User>> IUserRepository.GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
 {
     public static class EditTeacherRequestExtensions
     {
-        public static Teacher EditTeacher(this EditTeacherRequest request, Teacher teacher) 
+        public static User EditTeacher(this EditTeacherRequest request, User teacher) 
         {
             if (request == null) 
             {
@@ -28,8 +28,6 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
             teacher.Profession = request.Profession;
             teacher.Email = request.Email;
             teacher.Gender = request.Gender;
-            teacher.Score = request.Score;
-            teacher.NumberOfOpinions = request.NumberOfOpinions;
             teacher.Address = request.AddressForm.EditAddress(teacher.Address);
 
             return teacher;

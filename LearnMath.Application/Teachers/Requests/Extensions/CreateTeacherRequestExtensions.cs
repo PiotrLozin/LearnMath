@@ -32,8 +32,6 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
                 request.Profession,
                 request.Email,
                 request.Gender,
-                request.Score,
-                request.NumberOfOpinions,
                 request.Address.MapToAddress());
 
             return teacherEntity;

@@ -9,23 +9,23 @@ namespace LearnMath.Application.Teachers.Commands.Handlers
 {
     public class DeleteTeacherCommandHandler : IRequestHandler<DeleteTeacherCommand, int?>
     {
-        private readonly ITeacherRepository _teacherRepository;
+        private readonly IUserRepository _userRepository;
 
-        public DeleteTeacherCommandHandler(ITeacherRepository teacherRepository)
+        public DeleteTeacherCommandHandler(IUserRepository userRepository)
         {
-            _teacherRepository = teacherRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<int?> Handle(DeleteTeacherCommand request, CancellationToken cancellationToken)
         {
-            var teacher = await _teacherRepository.GetById(request.Id);
+            var teacher = await _userRepository.GetById(request.Id);
             
             if (teacher == null)
             {
                 return null;
             }
 
-            var result = await _teacherRepository.Delete(teacher);
+            var result = await _userRepository.Delete(teacher);
             return result;
         }
     }

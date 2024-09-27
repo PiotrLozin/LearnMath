@@ -12,16 +12,16 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
 {
     public class GetTeacherByIdQueryHandler : IRequestHandler<GetTeacherByIdQuery, TeacherDto?>
     {
-        private readonly ITeacherRepository _teacherRepository;
+        private readonly IUserRepository _userRepository;
 
-        public GetTeacherByIdQueryHandler(ITeacherRepository teacherRepository)
+        public GetTeacherByIdQueryHandler(IUserRepository userRepository)
         {
-            _teacherRepository = teacherRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<TeacherDto?> Handle(GetTeacherByIdQuery request, CancellationToken cancellationToken)
         {
-            var teacher = await _teacherRepository.GetById(request.Id);
+            var teacher = await _userRepository.GetById(request.Id);
 
             if (teacher == null)
             { 
