@@ -1,5 +1,4 @@
 ﻿using LearnMath.Application.Addresses;
-using LearnMath.Domain;
 using LearnMath.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -7,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnMath.Application.Teachers.Requests
+namespace LearnMath.Application.Users.Requests
 {
-    public record CreateTeacherRequest
+    public record CreateUserRequest
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

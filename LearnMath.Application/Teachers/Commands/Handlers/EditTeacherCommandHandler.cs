@@ -10,16 +10,16 @@ namespace LearnMath.Application.Teachers.Commands.Handlers
 {
     public class EditTeacherCommandHandler : IRequestHandler<EditTeacherCommand, int?>
     {
-        private readonly ITeacherRepository _teacherRepository;
+        private readonly IUserRepository _userRepository;
 
-        public EditTeacherCommandHandler(ITeacherRepository teacherRepository)
+        public EditTeacherCommandHandler(IUserRepository userRepository)
         {
-            _teacherRepository = teacherRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<int?> Handle(EditTeacherCommand request, CancellationToken cancellationToken)
         {
-            var teacher = await _teacherRepository.GetById(request.Id);
+            var teacher = await _userRepository.GetById(request.Id);
 
             if (teacher == null)
             {
@@ -27,7 +27,7 @@ namespace LearnMath.Application.Teachers.Commands.Handlers
             }
 
             var editedTeacher = request.EditTeacherRequest.EditTeacher(teacher);
-            var result = await _teacherRepository.Update(editedTeacher);
+            var result = await _userRepository.Update(editedTeacher);
             return result;
 
         }

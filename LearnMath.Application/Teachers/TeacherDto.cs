@@ -16,9 +16,7 @@ namespace LearnMath.Application.Teachers
             string? lastName,
             string? profession,
             string? email,
-            Gender gender,
-            int score,
-            int numberOfOpinions)
+            Gender gender)
         {
             Id = id;
             FirstName = firstName;
@@ -26,8 +24,6 @@ namespace LearnMath.Application.Teachers
             Profession = profession;
             Email = email;
             Gender = gender;
-            Score = score;
-            NumberOfOpinions = numberOfOpinions;
         }
         public int Id { get; set; }
         public string? FirstName { get; set; }
@@ -35,8 +31,6 @@ namespace LearnMath.Application.Teachers
         public string? Profession { get; set; }
         public string? Email { get; set; }
         public Gender Gender { get; set; }
-        public int Score { get; set; }
-        public int NumberOfOpinions { get; set; }
         public AddressDto Address { get; set; }
 
     }

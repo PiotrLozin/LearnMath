@@ -54,8 +54,9 @@ namespace LearnMath.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(List<Teacher>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> SaveTeacher([FromBody] CreateTeacherRequest request)
+        public async Task<IActionResult> SaveTeacher([FromBody] CreateUserRequest request)
         {
+            request.
             var command = new CreateTeacherCommand(request);
             var result = await _mediator.Send(command);
 

@@ -10,7 +10,7 @@ namespace LearnMath.Application.Teachers.MappingProfiles
 {
     public static class TeacherMappingProfile
     {
-        public static TeacherDto MapToTeacherDto(this Teacher teacher)
+        public static TeacherDto MapToTeacherDto(this User teacher)
         {
             TeacherDto teacherDto = new TeacherDto(
                 teacher.Id,
@@ -18,9 +18,7 @@ namespace LearnMath.Application.Teachers.MappingProfiles
                 teacher.LastName,
                 teacher.Profession,
                 teacher.Email,
-                teacher.Gender,
-                teacher.Score,
-                teacher.NumberOfOpinions);
+                teacher.Gender);
 
             return teacherDto;
         }

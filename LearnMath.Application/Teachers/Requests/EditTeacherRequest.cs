@@ -15,8 +15,6 @@ namespace LearnMath.Application.Teachers.Requests
         public string? Profession { get; set; }
         public string? Email { get; set; }
         public Gender Gender { get; set; }
-        public int Score { get; set; }
-        public int NumberOfOpinions { get; set; }
         public AddressDto AddressForm { get; set; }
     }
 }

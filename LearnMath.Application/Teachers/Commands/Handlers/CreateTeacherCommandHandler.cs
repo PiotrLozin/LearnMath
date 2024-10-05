@@ -11,18 +11,18 @@ namespace LearnMath.Application.Teachers.Commands.Handlers
 {
     public class CreateTeacherCommandHandler : IRequestHandler<CreateTeacherCommand, int>
     {
-        private readonly ITeacherRepository _teacherRepository;
+        private readonly IUserRepository _userRepository;
 
-        public CreateTeacherCommandHandler(ITeacherRepository teacherRepository)
+        public CreateTeacherCommandHandler(IUserRepository userRepository)
         {
-            _teacherRepository = teacherRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<int> Handle(CreateTeacherCommand request, CancellationToken cancellationToken)
         {
             var teacherEntity = request.TeacherRequest.MapToTeacher();
 
-            var result = await _teacherRepository.Save(teacherEntity);
+            var result = await _userRepository.Save(teacherEntity);
 
             return result;
         }

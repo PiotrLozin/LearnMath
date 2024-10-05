@@ -16,8 +16,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<LearnMathContext>();
 
-builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
-builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+// builder.Services.AddScoped<IUserRepository, StudentRepository>();
 
 builder.Services.AddMediatR(cfg => 
 {
