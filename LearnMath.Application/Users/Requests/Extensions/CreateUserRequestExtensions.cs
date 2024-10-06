@@ -1,21 +1,21 @@
 ﻿using LearnMath.Application.Addresses;
+using LearnMath.Application.Teachers.Requests.Extensions;
 using LearnMath.Domain;
 using LearnMath.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnMath.Application.Teachers.Requests.Extensions
+namespace LearnMath.Application.Users.Requests.Extensions
 {
-    public static class CreateTeacherRequestExtensions
+    public static class CreateUserRequestExtensions
     {
-        public static Teacher MapToTeacher(this CreateTeacherRequest request)
+        public static User MapToUser(this CreateUserRequest request)
         {
-            if (request is null) 
+            if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
@@ -25,18 +25,19 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
                 throw new ArgumentException($"Invalid gender value: {request.Gender}", nameof(request.Gender));
             }
 
-            Teacher teacherEntity = new Teacher(
+            User userEntity = new User(
                 default,
                 request.FirstName,
                 request.LastName,
                 request.Profession,
                 request.Email,
                 request.Gender,
-                request.Address.MapToAddress());
+                request.Address.MapToAddress(),
+                request.UserType);
 
-            return teacherEntity;
+            return userEntity;
         }
-        
+
         public static Address MapToAddress(this AddressDto request)
         {
             Address address = new Address(

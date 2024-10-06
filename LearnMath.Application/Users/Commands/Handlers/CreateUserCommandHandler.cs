@@ -1,4 +1,5 @@
 ﻿using LearnMath.Application.Teachers;
+using LearnMath.Application.Users.Requests.Extensions;
 using LearnMath.Domain.Enums;
 using MediatR;
 using System;
@@ -16,17 +17,13 @@ namespace LearnMath.Application.Users.Commands.Handlers
         {
             _userRepository = userRepository;
         }
-        public Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            if (request.UserType == UserType.Teacher)
-            {
-                var teacherEntity = request.UserRequest.MapToTeacher();
+            var userEntity = request.UserRequest.MapToUser();
 
-                var result = await _userRepository.Save(teacherEntity);
+            var result = await _userRepository.Save(userEntity);
 
-                return result;
-            }
-            var userEntity = request.
+            return result;
         }
     }
 }
