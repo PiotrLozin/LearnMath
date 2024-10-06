@@ -1,5 +1,8 @@
 ﻿using LearnMath.Application.Teachers.MappingProfiles;
 using LearnMath.Application.Teachers.Responses;
+using LearnMath.Application.Users;
+using LearnMath.Application.Users.MappingProfiles;
+using LearnMath.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -20,7 +23,7 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
 
         public async Task<GetAllTeacherResponse> Handle(GetAllTeachersQuery request, CancellationToken cancellationToken)
         {
-            var teachers = await _userRepository.GetAll();
+            var teachers = await _userRepository.GetAll(UserType.Teacher);
             var teachersDto = teachers.Select(teacher => 
                 {
                     var dto = teacher.MapToTeacherDto();

@@ -1,4 +1,5 @@
 ﻿using LearnMath.Application.Addresses;
+using LearnMath.Application.Users.Requests;
 using LearnMath.Domain;
 using LearnMath.Domain.Enums;
 using System;
@@ -7,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnMath.Application.Teachers.Requests.Extensions
+namespace LearnMath.Application.Users.Requests.Extensions
 {
-    public static class EditTeacherRequestExtensions
+    public static class EditUserRequestExtensions
     {
-        public static User EditTeacher(this EditTeacherRequest request, User teacher) 
+        public static User EditTeacher(this EditUserRequest request, User teacher)
         {
-            if (request == null) 
+            if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }

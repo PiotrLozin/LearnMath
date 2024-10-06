@@ -10,7 +10,7 @@ namespace LearnMath.Domain
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }
-        public bool Gender { get; set; }
+        public Gender Gender { get; set; }
         //public Subject[]? Subjects { get; set; }
         public Address Address { get; set; }
 
@@ -21,7 +21,7 @@ namespace LearnMath.Domain
             string firstName,
             string lastName,
             string email,
-            bool gender,
+            Gender gender,
             //Subject[] subjects,
             Address address
         )

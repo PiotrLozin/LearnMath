@@ -1,25 +1,26 @@
-﻿using MediatR;
+﻿using LearnMath.Application.Users;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnMath.Application.Teachers.Commands.Handlers
+namespace LearnMath.Application.Users.Commands.Handlers
 {
-    public class DeleteTeacherCommandHandler : IRequestHandler<DeleteTeacherCommand, int?>
+    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, int?>
     {
         private readonly IUserRepository _userRepository;
 
-        public DeleteTeacherCommandHandler(IUserRepository userRepository)
+        public DeleteUserCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        public async Task<int?> Handle(DeleteTeacherCommand request, CancellationToken cancellationToken)
+        public async Task<int?> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             var teacher = await _userRepository.GetById(request.Id);
-            
+
             if (teacher == null)
             {
                 return null;

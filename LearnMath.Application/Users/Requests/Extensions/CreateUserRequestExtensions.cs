@@ -1,5 +1,4 @@
 ﻿using LearnMath.Application.Addresses;
-using LearnMath.Application.Teachers.Requests.Extensions;
 using LearnMath.Domain;
 using LearnMath.Domain.Enums;
 using System;
@@ -13,7 +12,7 @@ namespace LearnMath.Application.Users.Requests.Extensions
 {
     public static class CreateUserRequestExtensions
     {
-        public static User MapToUser(this CreateUserRequest request)
+        public static User MapToUser(this CreateUserRequest request, UserType userType)
         {
             if (request is null)
             {
@@ -33,7 +32,7 @@ namespace LearnMath.Application.Users.Requests.Extensions
                 request.Email,
                 request.Gender,
                 request.Address.MapToAddress(),
-                request.UserType);
+                userType);
 
             return userEntity;
         }

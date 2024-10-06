@@ -22,16 +22,5 @@ namespace LearnMath.Application.Teachers.MappingProfiles
 
             return teacherDto;
         }
-
-        public static AddressDto MapToAddressDto(this Address address)
-        {
-            AddressDto addressDto = new AddressDto(
-                address.Street,
-                address.City,
-                address.Country,
-                address.PostCode);
-
-            return addressDto;
-        }
     }
 }

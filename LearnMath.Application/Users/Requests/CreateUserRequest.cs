@@ -16,6 +16,5 @@ namespace LearnMath.Application.Users.Requests
         public string? Email { get; set; }
         public Gender Gender { get; set; }
         public AddressDto Address { get; set; }
-        public UserType UserType { get; set; }
     }
 }

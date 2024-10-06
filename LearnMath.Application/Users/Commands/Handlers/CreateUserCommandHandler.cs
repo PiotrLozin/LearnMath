@@ -19,7 +19,7 @@ namespace LearnMath.Application.Users.Commands.Handlers
         }
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var userEntity = request.UserRequest.MapToUser();
+            var userEntity = request.UserRequest.MapToUser(request.UserType);
 
             var result = await _userRepository.Save(userEntity);
 

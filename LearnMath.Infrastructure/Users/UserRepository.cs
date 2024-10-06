@@ -1,5 +1,7 @@
 ﻿using LearnMath.Application.Teachers;
+using LearnMath.Application.Users;
 using LearnMath.Domain;
+using LearnMath.Domain.Enums;
 using LearnMath.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnMath.Infrastructure.Teachers
+namespace LearnMath.Infrastructure.Users
 {
     public class UserRepository : IUserRepository
     {
@@ -31,10 +33,9 @@ namespace LearnMath.Infrastructure.Teachers
             return result;
         }
 
-        public async Task<List<User>> GetAll()
+        public async Task<List<User>> GetAll(UserType userType)
         {
-
-            var users = await _context.Users.Include(x => x.Address).ToListAsync();
+            var users = await _context.Users.Include(x => x.Address).Where(u => u.UserType == userType).ToListAsync();
 
             return users;
         }

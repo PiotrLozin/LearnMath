@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnMath.Application.Teachers.Commands
+namespace LearnMath.Application.Users.Commands
 {
-    public class DeleteTeacherCommand : IRequest<int?>
+    public class DeleteUserCommand : IRequest<int?>
     {
         public int Id { get; set; }
-        public DeleteTeacherCommand(int id)
+        public DeleteUserCommand(int id)
         {
             Id = id;
         }

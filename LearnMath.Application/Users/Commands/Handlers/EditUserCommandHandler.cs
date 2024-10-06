@@ -1,4 +1,6 @@
-﻿using LearnMath.Application.Teachers.Requests.Extensions;
+﻿using LearnMath.Application.Users;
+using LearnMath.Application.Users.Commands;
+using LearnMath.Application.Users.Requests.Extensions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -6,18 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnMath.Application.Teachers.Commands.Handlers
+namespace LearnMath.Application.Users.Commands.Handlers
 {
-    public class EditTeacherCommandHandler : IRequestHandler<EditTeacherCommand, int?>
+    public class EditUserCommandHandler : IRequestHandler<EditUserCommand, int?>
     {
         private readonly IUserRepository _userRepository;
 
-        public EditTeacherCommandHandler(IUserRepository userRepository)
+        public EditUserCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        public async Task<int?> Handle(EditTeacherCommand request, CancellationToken cancellationToken)
+        public async Task<int?> Handle(EditUserCommand request, CancellationToken cancellationToken)
         {
             var teacher = await _userRepository.GetById(request.Id);
 
@@ -26,7 +28,8 @@ namespace LearnMath.Application.Teachers.Commands.Handlers
                 return null;
             }
 
-            var editedTeacher = request.EditTeacherRequest.EditTeacher(teacher);
+
+            var editedTeacher = request.EditUserRequest.EditTeacher(teacher);
             var result = await _userRepository.Update(editedTeacher);
             return result;
 

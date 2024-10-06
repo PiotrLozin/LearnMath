@@ -1,9 +1,9 @@
 using LearnMath.Application;
 using LearnMath.Application.Students;
 using LearnMath.Application.Teachers;
+using LearnMath.Application.Users;
 using LearnMath.Infrastructure.DataAccess;
-using LearnMath.Infrastructure.Students;
-using LearnMath.Infrastructure.Teachers;
+using LearnMath.Infrastructure.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
