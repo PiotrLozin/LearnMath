@@ -13,7 +13,8 @@ namespace LearnMath.Domain
         public int Id { get; set; }
         public int Score { get; set; }
         public string Description { get; set; }
-        public User User { get; set; }
+        public User CreatedByUser { get; set; }
+        public User Teacher { get; set; }
     }
 
 }
