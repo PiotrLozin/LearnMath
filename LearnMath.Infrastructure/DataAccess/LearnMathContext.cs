@@ -23,11 +23,23 @@ namespace LearnMath.Infrastructure.DataAccess
             modelBuilder.Entity<User>(user =>
             {
                 var id = user.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                // Konfiguracja relacji User (nauczyciel) -> Opinie
+                user.HasMany(u => u.Opinions)
+                    .WithOne(o => o.Teacher)
+                    .HasForeignKey(o => o.TeacherId)
+                    .OnDelete(DeleteBehavior.Cascade); // Usunięcie nauczyciela usuwa opinie
             });
 
             modelBuilder.Entity<UserOpinion>(opinion =>
             {
                 var id = opinion.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                // Konfiguracja relacji Opinia -> Student (CreatedByUser)
+                opinion.HasOne(o => o.CreatedByUser)
+                    .WithMany() // Student nie ma kolekcji opinii
+                    .HasForeignKey(o => o.CreatedByUserId)
+                    .OnDelete(DeleteBehavior.Restrict); // Usunięcie studenta nie usuwa opinii
             });
         }
 

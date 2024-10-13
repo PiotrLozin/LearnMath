@@ -39,10 +39,5 @@ namespace LearnMath.Domain
             Address = address;
             UserType = userType;
         }
-
-        //public void AddOpinion( UserOpinion opinion )
-        //{
-        //    Opinions.Add( opinion );
-        //}
     }
 }

@@ -1,7 +1,11 @@
-﻿using LearnMath.Application.Opinions.Commands;
+﻿using LearnMath.Application.Opinions;
+using LearnMath.Application.Opinions.Commands;
+using LearnMath.Application.Opinions.Queries;
 using LearnMath.Application.Opinions.Requests;
+using LearnMath.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace LearnMath.Api.Controllers
 {
@@ -13,6 +17,17 @@ namespace LearnMath.Api.Controllers
         public OpinionsController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(List<UserOpinionDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> Get()
+        {
+            var query = new GetAllOpinionsQuery();
+            var response = await _mediator.Send(query);
+
+            return Ok(response);
         }
 
         [HttpPost]

@@ -20,7 +20,6 @@ builder.Services.AddDbContext<LearnMathContext>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IOpinionRepository, OpinionRepository>();
-// builder.Services.AddScoped<IUserRepository, StudentRepository>();
 
 builder.Services.AddMediatR(cfg => 
 {

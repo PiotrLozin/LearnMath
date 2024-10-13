@@ -1,4 +1,5 @@
 ﻿using LearnMath.Domain;
+using LearnMath.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace LearnMath.Application.Opinions
 {
     public interface IOpinionRepository
     {
+        Task<List<UserOpinion>> GetAll();
         Task<int> Save(UserOpinion userOpinion);
     }
 }
