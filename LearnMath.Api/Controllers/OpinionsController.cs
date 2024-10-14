@@ -37,5 +37,21 @@ namespace LearnMath.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> DeleteOpinion(int id)
+        {
+            var command = new DeleteOpinionCommand(id);
+            var result = await _mediator.Send(command);
+
+            if(result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
     }
 }

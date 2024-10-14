@@ -19,6 +19,18 @@ namespace LearnMath.Infrastructure.Opinions
             _context = context;
         }
 
+        public async Task<int> Delete(UserOpinion userOpinion)
+        {
+            if (userOpinion == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            _context.Opinions.Remove(userOpinion);
+            var result = await _context.SaveChangesAsync();
+            return result;
+        }
+
         public async Task<List<UserOpinion>> GetAll()
         {
             var opinions = await _context.Opinions
@@ -29,6 +41,18 @@ namespace LearnMath.Infrastructure.Opinions
                 .ToListAsync();
 
             return opinions;
+        }
+
+        public async Task<UserOpinion?> GetById(int id)
+        {
+            var opinion = await _context.Opinions
+                .Include(x => x.Teacher)
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.Teacher.Address)
+                .Include(x => x.CreatedByUser.Address)
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+            return opinion;
         }
 
         public async Task<int> Save(UserOpinion userOpinion)

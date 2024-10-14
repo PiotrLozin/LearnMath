@@ -11,6 +11,8 @@ namespace LearnMath.Application.Opinions
     public interface IOpinionRepository
     {
         Task<List<UserOpinion>> GetAll();
+        Task<UserOpinion?> GetById(int id);
         Task<int> Save(UserOpinion userOpinion);
+        Task<int> Delete(UserOpinion userOpinion);
     }
 }
