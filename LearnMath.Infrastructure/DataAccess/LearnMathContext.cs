@@ -13,7 +13,10 @@ namespace LearnMath.Infrastructure.DataAccess
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("LearnMathDb");
+            optionsBuilder.UseSqlite(
+            @"Data Source=C:\Users\Piotr\Desktop\NauczSięMatematyki\Database\LearnMath.db;");
+
+            //optionsBuilder.UseInMemoryDatabase("LearnMathDb");
             base.OnConfiguring(optionsBuilder);
         }
 
