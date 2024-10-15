@@ -38,11 +38,11 @@ namespace LearnMath.Infrastructure.DataAccess
             {
                 var id = opinion.Property(e => e.Id).ValueGeneratedOnAdd();
 
-                // Konfiguracja relacji Opinia -> Student (CreatedByUser)
-                opinion.HasOne(o => o.CreatedByUser)
-                    .WithMany() // Student nie ma kolekcji opinii
-                    .HasForeignKey(o => o.CreatedByUserId)
-                    .OnDelete(DeleteBehavior.Restrict); // Usunięcie studenta nie usuwa opinii
+                //// Konfiguracja relacji Opinia -> Student (CreatedByUser)
+                //opinion.HasOne(o => o.CreatedByUser)
+                //    .WithMany() // Student nie ma kolekcji opinii
+                //    .HasForeignKey(o => o.CreatedByUserId)
+                //    .OnDelete(DeleteBehavior.Restrict); // Usunięcie studenta nie usuwa opinii
             });
         }
 

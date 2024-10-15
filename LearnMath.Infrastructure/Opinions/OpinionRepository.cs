@@ -35,9 +35,7 @@ namespace LearnMath.Infrastructure.Opinions
         {
             var opinions = await _context.Opinions
                 .Include(x => x.Teacher)
-                .Include(x => x.CreatedByUser)
                 .Include(x => x.Teacher.Address)
-                .Include(x => x.CreatedByUser.Address)
                 .ToListAsync();
 
             return opinions;
@@ -47,9 +45,7 @@ namespace LearnMath.Infrastructure.Opinions
         {
             var opinion = await _context.Opinions
                 .Include(x => x.Teacher)
-                .Include(x => x.CreatedByUser)
                 .Include(x => x.Teacher.Address)
-                .Include(x => x.CreatedByUser.Address)
                 .SingleOrDefaultAsync(x => x.Id == id);
 
             return opinion;

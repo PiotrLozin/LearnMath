@@ -54,7 +54,7 @@ namespace LearnMath.Application.Opinions.Commands.Handlers
 
             var opinion = new UserOpinion
             {
-                CreatedByUser = student,
+                CreatedByUser = student.FirstName + " " + student.LastName,
                 Teacher = teacher,
                 Score = request.OpinionRequest.Score,
                 Description = request.OpinionRequest.Description

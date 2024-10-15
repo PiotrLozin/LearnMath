@@ -24,7 +24,7 @@ namespace LearnMath.Application.Opinions
         public int Id { get; set; }
         public int Score { get; set; }
         public string Description { get; set; }
-        public StudentDto CreatedByUser { get; set; }
+        public string CreatedByUser { get; set; }
         public TeacherDto Teacher { get; set; }
     }
 }
