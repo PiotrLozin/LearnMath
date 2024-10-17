@@ -38,6 +38,25 @@ namespace LearnMath.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(UserOpinionDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType ((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var query = new GetOpinionByIdQuery()
+            {
+                Id = id
+            };
+
+            var response = await _mediator.Send(query);
+            if (response is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response);
+        }
+
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]

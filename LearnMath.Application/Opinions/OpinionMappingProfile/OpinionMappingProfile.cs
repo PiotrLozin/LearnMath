@@ -14,7 +14,8 @@ namespace LearnMath.Application.Opinions.OpinionMappingProfile
             UserOpinionDto userOpinionDto = new UserOpinionDto(
                 userOpinion.Id,
                 userOpinion.Score,
-                userOpinion.Description);
+                userOpinion.Description,
+                userOpinion.CreatedByUser);
 
             return userOpinionDto;
         }

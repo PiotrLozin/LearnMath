@@ -14,12 +14,14 @@ namespace LearnMath.Application.Opinions
         public UserOpinionDto(
             int id,
             int score,
-            string description
+            string description,
+            string createdByUser
             )
         {
             Id = id;
             Score = score;
             Description = description;
+            CreatedByUser = createdByUser;
         }
         public int Id { get; set; }
         public int Score { get; set; }

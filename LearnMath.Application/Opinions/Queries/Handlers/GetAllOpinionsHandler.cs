@@ -29,7 +29,6 @@ namespace LearnMath.Application.Opinions.Queries.Handlers
                     var dto = opinion.MapToUserOpinionDto();
                     dto.Teacher = opinion.Teacher.MapToTeacherDto();
                     dto.Teacher.Address = opinion.Teacher.Address.MapToAddressDto();
-                    dto.CreatedByUser = opinion.CreatedByUser;
                     return dto;
                 }).ToList();
             return new GetAllOpinionsResponse(opinionsDto);
