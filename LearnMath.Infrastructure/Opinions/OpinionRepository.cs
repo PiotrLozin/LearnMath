@@ -57,5 +57,17 @@ namespace LearnMath.Infrastructure.Opinions
             var result = await _context.SaveChangesAsync();
             return result;
         }
+
+        public async Task<int> Update(UserOpinion userOpinion)
+        {
+            var opinion = await _context.Opinions.FindAsync(userOpinion.Id);
+            if (opinion == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var result = await _context.SaveChangesAsync();
+            return result;
+        }
     }
 }

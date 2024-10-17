@@ -14,5 +14,6 @@ namespace LearnMath.Application.Opinions
         Task<UserOpinion?> GetById(int id);
         Task<int> Save(UserOpinion userOpinion);
         Task<int> Delete(UserOpinion userOpinion);
+        Task<int> Update(UserOpinion userOpinion);
     }
 }
