@@ -1,5 +1,7 @@
 ﻿using LearnMath.Application.Teachers;
+using LearnMath.Application.Users;
 using LearnMath.Domain;
+using LearnMath.Domain.Enums;
 using LearnMath.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,55 +10,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnMath.Infrastructure.Teachers
+namespace LearnMath.Infrastructure.Users
 {
-    public class TeacherRepository : ITeacherRepository
+    public class UserRepository : IUserRepository
     {
         private readonly LearnMathContext _context;
 
-        public TeacherRepository(LearnMathContext context)
+        public UserRepository(LearnMathContext context)
         {
             _context = context;
         }
 
-        public async Task<int> Delete(Teacher entity)
+        public async Task<int> Delete(User entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException();
             }
 
-            _context.Teachers.Remove(entity);
+            _context.Users.Remove(entity);
             var result = await _context.SaveChangesAsync();
             return result;
         }
 
-        public async Task<List<Teacher>> GetAll()
+        public async Task<List<User>> GetAll(UserType userType)
         {
+            var users = await _context.Users.Include(x => x.Address).Where(u => u.UserType == userType).ToListAsync();
 
-            var teachers = await _context.Teachers.Include(x => x.Address).ToListAsync();
-            
-            return teachers;
+            return users;
         }
 
-        public async Task<Teacher?> GetById(int id)
+        public async Task<User?> GetById(int id)
         {
-            var teacher = await _context.Teachers.Include(x => x.Address).SingleOrDefaultAsync(x => x.Id == id);
+            var user = await _context.Users.Include(x => x.Address).SingleOrDefaultAsync(x => x.Id == id);
 
-            return teacher;
+            return user;
         }
 
-        public async Task<int> Save(Teacher entity)
+        public async Task<int> Save(User entity)
         {
-            _context.Teachers.Add(entity);
+            _context.Users.Add(entity);
             var result = await _context.SaveChangesAsync();
             return result;
         }
 
-        public async Task<int> Update(Teacher entity)
+        public async Task<int> Update(User entity)
         {
-            var teacher = await _context.Teachers.FindAsync(entity.Id);
-            if (teacher == null)
+            var user = await _context.Users.FindAsync(entity.Id);
+            if (user == null)
             {
                 throw new ArgumentNullException();
             }

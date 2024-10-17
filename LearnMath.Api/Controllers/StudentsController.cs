@@ -1,6 +1,12 @@
 ﻿using LearnMath.Application.Students;
+using LearnMath.Application.Students.Queries;
 using LearnMath.Application.Teachers;
+using LearnMath.Application.Teachers.Queries;
+using LearnMath.Application.Users.Commands;
+using LearnMath.Application.Users.Requests;
 using LearnMath.Domain;
+using LearnMath.Domain.Enums;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -10,20 +16,63 @@ namespace LearnMath.Api.Controllers
     [Route("students")]
     public class StudentsController : ControllerBase
     {
-        private readonly IStudentRepository _studentRepository;
+        private readonly IMediator _mediator;
 
-        public StudentsController(IStudentRepository studentRepository)
+        public StudentsController(IMediator mediator)
         {
-            _studentRepository = studentRepository;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(List<Student>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(List<StudentDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Get()
         {
-            var result = await _studentRepository.GetAll();
-            if (!result.Any())
+            var query = new GetAllStudentsQuery();
+            var response = await _mediator.Send(query);
+
+            return Ok(response.Students);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(List<StudentDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> SaveStudent([FromBody] CreateUserRequest request)
+        {
+            var command = new CreateUserCommand(request, UserType.Student);
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(StudentDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var query = new GetStudentByIdQuery()
+            {
+                Id = id
+            };
+
+            var response = await _mediator.Send(query);
+            if (response is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response);
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(List<StudentDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> EditStudent([FromBody] EditUserRequest request, int id)
+        {
+            var command = new EditUserCommand(request, id);
+            var result = await _mediator.Send(command);
+
+            if (result == null)
             {
                 return NotFound();
             }
@@ -31,20 +80,18 @@ namespace LearnMath.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
-        [ProducesResponseType(typeof(List<Student>), (int)HttpStatusCode.OK)]
+        [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> SaveStudent([FromBody] StudentDto student)
+        public async Task<IActionResult> DeleteStudent(int id)
         {
-            Student studentEntity = new Student(
-                Guid.Empty,
-                student.FirstName,
-                student.LastName,
-                student.Email,
-                student.Gender,
-                new Address(Guid.Empty, "street", "city", "country", "postCode"));
+            var command = new DeleteUserCommand(id);
+            var result = await _mediator.Send(command);
 
-            var result = await _studentRepository.Save(studentEntity);
+            if (result == null)
+            {
+                return NotFound();
+            }
 
             return Ok(result);
         }

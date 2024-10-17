@@ -4,18 +4,17 @@ using LearnMath.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnMath.Application.Teachers.Requests.Extensions
+namespace LearnMath.Application.Users.Requests.Extensions
 {
-    public static class CreateTeacherRequestExtensions
+    public static class CreateUserRequestExtensions
     {
-        public static Teacher MapToTeacher(this CreateTeacherRequest request)
+        public static User MapToUser(this CreateUserRequest request, UserType userType)
         {
-            if (request is null) 
+            if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
@@ -25,20 +24,19 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
                 throw new ArgumentException($"Invalid gender value: {request.Gender}", nameof(request.Gender));
             }
 
-            Teacher teacherEntity = new Teacher(
+            User userEntity = new User(
                 default,
                 request.FirstName,
                 request.LastName,
                 request.Profession,
                 request.Email,
                 request.Gender,
-                request.Score,
-                request.NumberOfOpinions,
-                request.Address.MapToAddress());
+                request.Address.MapToAddress(),
+                userType);
 
-            return teacherEntity;
+            return userEntity;
         }
-        
+
         public static Address MapToAddress(this AddressDto request)
         {
             Address address = new Address(
@@ -49,17 +47,6 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
                 request.PostCode);
 
             return address;
-        }
-
-        public static bool TryParseEnum<TEnum>(this int enumValue, out TEnum retVal)
-        {
-            retVal = default(TEnum);
-            bool success = Gender.IsDefined(typeof(TEnum), enumValue);
-            if (success)
-            {
-                retVal = (TEnum)Gender.ToObject(typeof(TEnum), enumValue);
-            }
-            return success;
         }
     }
 }

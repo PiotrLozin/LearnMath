@@ -1,4 +1,5 @@
 ﻿using LearnMath.Application.Addresses;
+using LearnMath.Application.Users.Requests;
 using LearnMath.Domain;
 using LearnMath.Domain.Enums;
 using System;
@@ -7,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnMath.Application.Teachers.Requests.Extensions
+namespace LearnMath.Application.Users.Requests.Extensions
 {
-    public static class EditTeacherRequestExtensions
+    public static class EditUserRequestExtensions
     {
-        public static Teacher EditTeacher(this EditTeacherRequest request, Teacher teacher) 
+        public static User EditTeacher(this EditUserRequest request, User teacher)
         {
-            if (request == null) 
+            if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
@@ -28,8 +29,6 @@ namespace LearnMath.Application.Teachers.Requests.Extensions
             teacher.Profession = request.Profession;
             teacher.Email = request.Email;
             teacher.Gender = request.Gender;
-            teacher.Score = request.Score;
-            teacher.NumberOfOpinions = request.NumberOfOpinions;
             teacher.Address = request.AddressForm.EditAddress(teacher.Address);
 
             return teacher;
