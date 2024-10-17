@@ -26,7 +26,7 @@ namespace LearnMath.Application.Students.Queries.Handlers
             var students = await _userRepository.GetAll(UserType.Student);
             var studentsDto = students.Select(student => 
                 {
-                    var dto = student.MapToStudent();
+                    var dto = student.MapToStudentDto();
                     dto.Address = student.Address.MapToAddressDto();
                     return dto;
                 }).ToList();

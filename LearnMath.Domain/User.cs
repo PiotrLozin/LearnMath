@@ -16,7 +16,7 @@ namespace LearnMath.Domain
         public Gender Gender { get; set; }
         public Address Address { get; set; }
         public UserType UserType { get; set; }
-        public virtual List<UserOpinion> Opinions { get; set; }
+        public virtual ICollection<UserOpinion> Opinions { get; set; }
         public User() { }
 
         public User(
@@ -38,11 +38,6 @@ namespace LearnMath.Domain
             Gender = gender;
             Address = address;
             UserType = userType;
-        }
-
-        public void AddOpinion( UserOpinion opinion )
-        {
-            Opinions.Add( opinion );
         }
     }
 }

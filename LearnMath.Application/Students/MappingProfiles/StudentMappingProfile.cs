@@ -11,7 +11,7 @@ namespace LearnMath.Application.Students.MappingProfiles
 {
     public static class StudentMappingProfile
     {
-        public static StudentDto MapToStudent(this User student)
+        public static StudentDto MapToStudentDto(this User student)
         {
             StudentDto studentDto = new StudentDto(
                 student.Id,

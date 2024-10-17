@@ -1,8 +1,10 @@
 using LearnMath.Application;
+using LearnMath.Application.Opinions;
 using LearnMath.Application.Students;
 using LearnMath.Application.Teachers;
 using LearnMath.Application.Users;
 using LearnMath.Infrastructure.DataAccess;
+using LearnMath.Infrastructure.Opinions;
 using LearnMath.Infrastructure.Users;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<LearnMathContext>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-// builder.Services.AddScoped<IUserRepository, StudentRepository>();
+builder.Services.AddScoped<IOpinionRepository, OpinionRepository>();
 
 builder.Services.AddMediatR(cfg => 
 {

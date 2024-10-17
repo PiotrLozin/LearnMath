@@ -406,3 +406,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+/Database
+/DB_browser

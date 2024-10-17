@@ -16,7 +16,6 @@ namespace LearnMath.Domain
             string profession,
             string email,
             Gender gender,
-            //Subject[] subjects,
             Address address
         )
         {
@@ -26,7 +25,6 @@ namespace LearnMath.Domain
             Profession = profession;
             Email = email;
             Gender = gender;
-            //Subjects = subjects;
             Address = address;
             UserType = UserType.Teacher;
         }

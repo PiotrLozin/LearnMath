@@ -4,25 +4,16 @@ using LearnMath.Domain.Enums;
 
 namespace LearnMath.Domain
 {
-    public class Student
+    public class Student : User
     {
-        public Guid Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public string? Email { get; set; }
-        public Gender Gender { get; set; }
-        //public Subject[]? Subjects { get; set; }
-        public Address Address { get; set; }
-
         public Student() { }
 
         public Student(
-            Guid id,
+            int id,
             string firstName,
             string lastName,
             string email,
             Gender gender,
-            //Subject[] subjects,
             Address address
         )
         {
@@ -31,7 +22,6 @@ namespace LearnMath.Domain
             LastName = lastName;
             Email = email;
             Gender = gender;
-            //Subjects = subjects;
             Address = address;
         }
     }
