@@ -31,7 +31,7 @@ namespace LearnMath.Application.Students.Queries.Handlers
                 return null;
             }
 
-            var studentDto = student.MapToStudent();
+            var studentDto = student.MapToStudentDto();
             studentDto.Address = student.Address.MapToAddressDto();
             
             return studentDto;

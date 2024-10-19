@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace LearnMath.Application.Teachers.Queries.Handlers
 {
-    internal class GetAllTeachersQueryHandler : IRequestHandler<GetAllTeachersQuery, GetAllTeacherResponse>
+    public class GetAllTeachersQueryHandler : IRequestHandler<GetAllTeachersQuery, GetAllTeacherResponse>
     {
         private readonly IUserRepository _userRepository;
 
