@@ -57,6 +57,25 @@ namespace LearnMath.Api.Controllers
             return Ok(response);
         }
 
+        [HttpGet("teacher/{teacherId}")]
+        [ProducesResponseType(typeof(List<UserOpinionDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetAllByTeacherId(int teacherId)
+        {
+            var query = new GetAllOpinionsByTeacherIdQuery()
+            {
+                TeacherId = teacherId
+            };
+
+            var response = await _mediator.Send(query);
+            if (response is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response);
+        }
+
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(List<UserOpinion>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]

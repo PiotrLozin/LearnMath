@@ -51,6 +51,17 @@ namespace LearnMath.Infrastructure.Opinions
             return opinion;
         }
 
+        public async Task<List<UserOpinion>> GetAllByTeacherId(int teacherId)
+        {
+            var opinions = await _context.Opinions
+                .Include(x => x.Teacher)
+                .Include(x => x.Teacher.Address)
+                .Where(x => x.TeacherId == teacherId)
+                .ToListAsync();
+
+            return opinions;
+        }
+
         public async Task<int> Save(UserOpinion userOpinion)
         {
             _context.Opinions.Add(userOpinion);

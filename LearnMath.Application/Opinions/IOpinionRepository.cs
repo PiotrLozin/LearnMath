@@ -12,6 +12,7 @@ namespace LearnMath.Application.Opinions
     {
         Task<List<UserOpinion>> GetAll();
         Task<UserOpinion?> GetById(int id);
+        Task<List<UserOpinion>> GetAllByTeacherId(int teacherId);
         Task<int> Save(UserOpinion userOpinion);
         Task<int> Delete(UserOpinion userOpinion);
         Task<int> Update(UserOpinion userOpinion);
