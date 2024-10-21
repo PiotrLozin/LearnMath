@@ -12,8 +12,9 @@ import { routes } from './app.routes';
 import { HomeComponent } from './features/home/home.component';
 import { AddressComponent } from './features/teacher/components/address/address.component';
 import { EditTeacherComponent } from './features/teacher/pages/edit-teacher/edit-teacher.component';
-
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -33,10 +34,18 @@ import { EditTeacherComponent } from './features/teacher/pages/edit-teacher/edit
       RouterOutlet,
       RouterLink,
       RouterLinkActive,
-      ReactiveFormsModule        
+      ReactiveFormsModule,
+      FontAwesomeModule        
   ],
   providers: [
     importProvidersFrom(HttpClientModule)
   ],
+  exports: [
+    FontAwesomeModule
+  ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+  }
+ }

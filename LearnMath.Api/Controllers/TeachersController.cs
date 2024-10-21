@@ -1,9 +1,9 @@
 ﻿using LearnMath.Application.Teachers;
-using LearnMath.Application.Teachers.Commands;
 using LearnMath.Application.Teachers.Queries;
-using LearnMath.Application.Teachers.Requests;
-using LearnMath.Application.Teachers.Requests.Extensions;
+using LearnMath.Application.Users.Commands;
+using LearnMath.Application.Users.Requests;
 using LearnMath.Domain;
+using LearnMath.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -22,7 +22,7 @@ namespace LearnMath.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(List<Teacher>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(List<TeacherDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Get()
         {
@@ -54,9 +54,9 @@ namespace LearnMath.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(List<Teacher>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> SaveTeacher([FromBody] CreateTeacherRequest request)
+        public async Task<IActionResult> SaveTeacher([FromBody] CreateUserRequest request)
         {
-            var command = new CreateTeacherCommand(request);
+            var command = new CreateUserCommand(request, UserType.Teacher);
             var result = await _mediator.Send(command);
 
             return Ok(result);
@@ -65,9 +65,9 @@ namespace LearnMath.Api.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(List<Teacher>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> EditTeacher([FromBody] EditTeacherRequest request, int id)
+        public async Task<IActionResult> EditTeacher([FromBody] EditUserRequest request, int id)
         {
-            var command = new EditTeacherCommand(request, id);
+            var command = new EditUserCommand(request, id);
             var result = await _mediator.Send(command);
 
             if (result == null)
@@ -83,7 +83,7 @@ namespace LearnMath.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> DeleteTeacher(int id)
         {
-            var command = new DeleteTeacherCommand(id);
+            var command = new DeleteUserCommand(id);
             var result = await _mediator.Send(command);
 
             if(result == null)

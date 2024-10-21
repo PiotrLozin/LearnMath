@@ -5,20 +5,8 @@ using LearnMath.Domain.Enums;
 
 namespace LearnMath.Domain
 {
-    public class Teacher
+    public class Teacher : User
     {
-        [Key]
-        public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public string? Profession { get; set; }
-        public string? Email { get; set; }
-        public Gender Gender { get; set; }
-        public int Score { get; set; }
-        public int NumberOfOpinions { get; set; }
-        //public Subject[]? Subjects { get; set; }
-        public Address Address { get; set; }
-
         public Teacher() { }
 
         public Teacher(
@@ -28,9 +16,6 @@ namespace LearnMath.Domain
             string profession,
             string email,
             Gender gender,
-            int score,
-            int numberOfOpinions,
-            //Subject[] subjects,
             Address address
         )
         {
@@ -40,10 +25,8 @@ namespace LearnMath.Domain
             Profession = profession;
             Email = email;
             Gender = gender;
-            Score = score;
-            NumberOfOpinions = numberOfOpinions;
-            //Subjects = subjects;
             Address = address;
+            UserType = UserType.Teacher;
         }
     }
 }

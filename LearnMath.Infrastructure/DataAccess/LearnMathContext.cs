@@ -13,25 +13,41 @@ namespace LearnMath.Infrastructure.DataAccess
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("LearnMathDb");
+            optionsBuilder.UseSqlite(
+            @"Data Source=C:\Users\Piotr\Desktop\NauczSięMatematyki\Database\LearnMath.db;");
+
+            //optionsBuilder.UseInMemoryDatabase("LearnMathDb");
             base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Teacher>(teacher =>
+            modelBuilder.Entity<User>(user =>
             {
-                var id = teacher.Property(e => e.Id).ValueGeneratedOnAdd();
-                if (Database.IsInMemory())
-                {
-                    //id.HasValueGenerator<InMemoryIntegerValueGenerator<int>>();
-                }
+                var id = user.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                // Konfiguracja relacji User (nauczyciel) -> Opinie
+                user.HasMany(u => u.Opinions)
+                    .WithOne(o => o.Teacher)
+                    .HasForeignKey(o => o.TeacherId)
+                    .OnDelete(DeleteBehavior.Cascade); // Usunięcie nauczyciela usuwa opinie
+            });
+
+            modelBuilder.Entity<UserOpinion>(opinion =>
+            {
+                var id = opinion.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                //// Konfiguracja relacji Opinia -> Student (CreatedByUser)
+                //opinion.HasOne(o => o.CreatedByUser)
+                //    .WithMany() // Student nie ma kolekcji opinii
+                //    .HasForeignKey(o => o.CreatedByUserId)
+                //    .OnDelete(DeleteBehavior.Restrict); // Usunięcie studenta nie usuwa opinii
             });
         }
 
-        public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<Student> Students { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOpinion> Opinions { get; set; }
         public DbSet<Address> Addreses { get; set; }
     }
 }

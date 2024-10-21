@@ -1,5 +1,8 @@
 ﻿using LearnMath.Application.Teachers.MappingProfiles;
 using LearnMath.Application.Teachers.Responses;
+using LearnMath.Application.Users;
+using LearnMath.Application.Users.MappingProfiles;
+using LearnMath.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,18 +12,18 @@ using System.Threading.Tasks;
 
 namespace LearnMath.Application.Teachers.Queries.Handlers
 {
-    internal class GetAllTeachersQueryHandler : IRequestHandler<GetAllTeachersQuery, GetAllTeacherResponse>
+    public class GetAllTeachersQueryHandler : IRequestHandler<GetAllTeachersQuery, GetAllTeacherResponse>
     {
-        private readonly ITeacherRepository _teacherRepository;
+        private readonly IUserRepository _userRepository;
 
-        public GetAllTeachersQueryHandler(ITeacherRepository teacherRepository)
+        public GetAllTeachersQueryHandler(IUserRepository userRepository)
         {
-            _teacherRepository = teacherRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<GetAllTeacherResponse> Handle(GetAllTeachersQuery request, CancellationToken cancellationToken)
         {
-            var teachers = await _teacherRepository.GetAll();
+            var teachers = await _userRepository.GetAll(UserType.Teacher);
             var teachersDto = teachers.Select(teacher => 
                 {
                     var dto = teacher.MapToTeacherDto();
