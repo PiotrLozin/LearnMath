@@ -34,7 +34,6 @@ export class TeacherComponent implements OnInit{
 
   onEdit(id: number): void {
     this.router.navigate(["app-edit-teacher", id])
-
   }
 
   private loadTeachers(): void {

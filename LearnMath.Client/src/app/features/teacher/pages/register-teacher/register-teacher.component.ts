@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TeacherModel, TeacherRequestModel } from '../../teacher.model';
+import { TeacherModel, TeacherPostRequestModel } from '../../teacher.model';
 import { RegisterTeacherService } from '../../../register-teacher/service/register-teacher.service';
 import { TeacherService } from '../../services/teacher.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -25,8 +25,6 @@ export class RegisterTeacherComponent{
     profession: ['Math', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
     email: ['piotrloz', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
     gender: ['', Validators.required],
-    score: ['123', Validators.required],
-    numberOfOpinions: ['123', Validators.required],
     addressForm : this.formBuilder.group({
       street: ['', Validators.compose([Validators.required])],
       city: ['', Validators.compose([Validators.required])],
@@ -53,15 +51,13 @@ export class RegisterTeacherComponent{
     return 
   }
 
-  mapToRequest(teacherForm: any): TeacherRequestModel {
+  mapToRequest(teacherForm: any): TeacherPostRequestModel {
     return {
       firstName: teacherForm.firstName,
       lastName: teacherForm.lastName,
       profession: teacherForm.profession,
       email: teacherForm.email,
       gender: parseInt(teacherForm.gender),
-      score: parseInt(teacherForm.score),
-      numberOfOpinions: parseInt(teacherForm.numberOfOpinions),
       address: {
         street: teacherForm.addressForm.street,
         city: teacherForm.addressForm.city,

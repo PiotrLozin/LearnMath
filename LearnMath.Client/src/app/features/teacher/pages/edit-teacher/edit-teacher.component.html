@@ -18,15 +18,11 @@
       </div>
       <div class="mb-3 col-3">
         <label for="gender" class="form-label">Gender</label>
-        <input id="gender" class="form-control" formControlName="gender">
-      </div>
-      <div class="mb-3 col-3">
-        <label for="score" class="form-label">Score</label>
-        <input id="score" class="form-control" formControlName="score">
-      </div>
-      <div class="mb-3 col-3">
-        <label for="numberOfOpinions" class="form-label">Number of Opinions</label>
-        <input id="numberOfOpinions" class="form-control" formControlName="numberOfOpinions">
+        <select class="form-control" formControlName="gender" aria-label="Default select example">
+          <option value="" disabled selected>Select your gender</option>
+          <option value="0">Male</option>
+          <option value="1">Famale</option>
+        </select>
       </div>
       <teacher-address [addressForm]="teacherForm.controls.addressForm"></teacher-address>
       <button type="submit">Submit</button>

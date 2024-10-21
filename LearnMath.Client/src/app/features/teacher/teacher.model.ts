@@ -6,19 +6,24 @@ export interface TeacherModel{
     lastName: string;
     profession: string;
     email: string;
-    gender: number;
-    score: number;
-    numberOfOpinions: number;
+    gender: string;
     address: AddressModel
 }
 
-export interface TeacherRequestModel{
+export interface TeacherPostRequestModel{
     firstName: string;
     lastName: string;
     profession: string;
     email: string;
     gender: number;
-    score: number;
-    numberOfOpinions: number;
     address: AddressModel;
+}
+
+export interface TeacherEditRequestModel{
+    firstName: string;
+    lastName: string;
+    profession: string;
+    email: string;
+    gender: number;
+    addressForm: AddressModel;
 }
