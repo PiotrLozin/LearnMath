@@ -1,1 +1,29 @@
-<p>home works!</p>
+<!-- home.component.html -->
+<div class="teacher-filter-container">
+    <h3>Wybierz filtr</h3>
+    <form (ngSubmit)="applyFilter()">
+      <label>
+        Przedmiot:
+        <input [(ngModel)]="filters.subject" name="subject" type="text">
+      </label>
+      <label>
+        Miasto:
+        <input [(ngModel)]="filters.city" name="city" type="text">
+      </label>
+      <label>
+        Minimalna ocena:
+        <input [(ngModel)]="filters.minRating" name="minRating" type="number" min="1" max="5">
+      </label>
+      <label>
+        Maksymalna odległość:
+        <input [(ngModel)]="filters.maxDistance" name="maxDistance" type="number" min="1">
+      </label>
+      <button type="submit">Zastosuj filtr</button>
+    </form>
+</div>
+
+<!-- Komponent wyświetlający nauczycieli z przekazanymi filtrami  [filterCriteria]="filters"-->
+<div class="teacher-container">
+    <h3>Znajdź nauczyciela</h3>
+    <app-teacher></app-teacher>
+</div>

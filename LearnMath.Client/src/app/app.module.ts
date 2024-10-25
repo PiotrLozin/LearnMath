@@ -2,10 +2,9 @@ import { NgModule, importProvidersFrom } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { ForecastComponent } from './features/forecast/forecast.component';
-import { TeacherComponent } from './features/teacher/teacher.component';
+import { TeacherComponent } from './features/teacher/pages/get-all-teacher/teacher.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterTeacherComponent } from './features/teacher/pages/register-teacher/register-teacher.component';
 import { routes } from './app.routes';
@@ -18,7 +17,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
-    ForecastComponent,
     TeacherComponent,
     RegisterTeacherComponent,
     EditTeacherComponent,
@@ -29,6 +27,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
   bootstrap: [AppComponent],
   imports: [
       BrowserModule,
+      FormsModule,
       CommonModule,
       RouterModule.forRoot(routes),
       RouterOutlet,

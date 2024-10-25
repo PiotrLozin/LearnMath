@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TeacherModel, TeacherPostRequestModel } from '../../teacher.model';
-import { RegisterTeacherService } from '../../../register-teacher/service/register-teacher.service';
+import { TeacherModel, TeacherPostRequestModel } from '../../models/teacher.model';
 import { TeacherService } from '../../services/teacher.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';

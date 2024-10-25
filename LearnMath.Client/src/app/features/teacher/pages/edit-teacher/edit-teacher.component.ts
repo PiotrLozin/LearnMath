@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TeacherEditRequestModel, TeacherModel } from '../../teacher.model';
+import { TeacherEditRequestModel, TeacherModel } from '../../models/teacher.model';
 import { TeacherService } from '../../services/teacher.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
