@@ -44,6 +44,16 @@
         <button class="btn btn-primary" (click)="onEdit(teacher.id)">Edit</button>
         <button class="btn btn-warning" (click)="onDelete(teacher.id)">Del</button>
       </div>
+      <div class="col">
+        <div class="opinion-container">
+          <app-get-teacher-opinions [teacherId]="teacher.id" [totalOpinions]="teacher.totalOpinions"></app-get-teacher-opinions>
+        </div>
+      </div>
+      <div class="col">
+        <div class="opinion-container">
+          <app-create-opinion></app-create-opinion>
+        </div>
+      </div>
     </div>
   </div>  
 </div>

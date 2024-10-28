@@ -35,7 +35,10 @@ namespace LearnMath.Infrastructure.Users
 
         public async Task<List<User>> GetAll(UserType userType)
         {
-            var users = await _context.Users.Include(x => x.Address).Where(u => u.UserType == userType).ToListAsync();
+            var users = await _context.Users
+                .Include(x => x.Address)
+                .Include(x => x.Opinions)
+                .Where(u => u.UserType == userType).ToListAsync();
 
             return users;
         }

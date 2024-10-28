@@ -7,7 +7,8 @@ export interface TeacherModel{
     profession: string;
     email: string;
     gender: string;
-    address: AddressModel
+    address: AddressModel;
+    totalOpinions: number
 }
 
 export interface TeacherPostRequestModel{

@@ -16,6 +16,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { CreateOpinionComponent } from './features/user-opinion/pages/create-opinion/create-opinion.component';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { GetTeacherOpinionsComponent } from './features/user-opinion/pages/get-teacher-opinions/get-teacher-opinions.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
     EditTeacherComponent,
     AddressComponent,
     CreateOpinionComponent,
+    GetTeacherOpinionsComponent,
     AppComponent,
     HomeComponent
   ],

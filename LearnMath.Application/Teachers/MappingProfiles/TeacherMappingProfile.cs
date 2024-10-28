@@ -12,13 +12,15 @@ namespace LearnMath.Application.Teachers.MappingProfiles
     {
         public static TeacherDto MapToTeacherDto(this User teacher)
         {
+            var total = teacher.Opinions.Count;
             TeacherDto teacherDto = new TeacherDto(
                 teacher.Id,
                 teacher.FirstName,
                 teacher.LastName,
                 teacher.Profession,
                 teacher.Email,
-                teacher.Gender);
+                teacher.Gender,
+                total);
 
             return teacherDto;
         }
