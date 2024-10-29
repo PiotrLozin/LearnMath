@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { TeacherComponent } from './features/teacher/pages/get-all-teacher/teacher.component';
+import { TeacherComponent } from './features/teacher/components/get-all-teacher/teacher.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterTeacherComponent } from './features/teacher/pages/register-teacher/register-teacher.component';
 import { routes } from './app.routes';
@@ -14,19 +14,25 @@ import { EditTeacherComponent } from './features/teacher/pages/edit-teacher/edit
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { CreateOpinionComponent } from './features/user-opinion/pages/create-opinion/create-opinion.component';
+import { CreateOpinionComponent } from './features/user-opinion/components/create-opinion/create-opinion.component';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { GetTeacherOpinionsComponent } from './features/user-opinion/pages/get-teacher-opinions/get-teacher-opinions.component';
+import { GetTeacherOpinionsComponent } from './features/user-opinion/components/get-teacher-opinions/get-teacher-opinions.component';
+import { NavBarComponent } from './features/nav-bar/nav-bar.component';
+import { GetTeachersFilterComponent } from './features/teacher/components/get-teachers-filter/get-teachers-filter.component';
+import { CreateOpinionModalComponent } from './features/user-opinion/components/create-opinion-modal/create-opinion-modal.component';
 
 @NgModule({
   declarations: [
     TeacherComponent,
+    GetTeachersFilterComponent,
     RegisterTeacherComponent,
     EditTeacherComponent,
     AddressComponent,
     CreateOpinionComponent,
+    CreateOpinionModalComponent,
     GetTeacherOpinionsComponent,
     AppComponent,
+    NavBarComponent,
     HomeComponent
   ],
   bootstrap: [AppComponent],

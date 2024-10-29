@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { TeacherComponent } from './features/teacher/pages/get-all-teacher/teacher.component';
+import { TeacherComponent } from './features/teacher/components/get-all-teacher/teacher.component';
 import { RegisterTeacherComponent } from './features/teacher/pages/register-teacher/register-teacher.component';
 import { HomeComponent } from './features/home/home.component';
 import { EditTeacherComponent } from './features/teacher/pages/edit-teacher/edit-teacher.component';

@@ -1,0 +1,20 @@
+<h3>Wybierz filtr</h3>
+<form (ngSubmit)="applyFilter()">
+    <label>
+    Przedmiot:
+    <input [(ngModel)]="filters.subject" name="subject" type="text">
+    </label>
+    <label>
+    Miasto:
+    <input [(ngModel)]="filters.city" name="city" type="text">
+    </label>
+    <label>
+    Minimalna ocena:
+    <input [(ngModel)]="filters.minRating" name="minRating" type="number" min="1" max="5">
+    </label>
+    <label>
+    Maksymalna odległość:
+    <input [(ngModel)]="filters.maxDistance" name="maxDistance" type="number" min="1">
+    </label>
+    <button type="submit">Zastosuj filtr</button>
+</form>
