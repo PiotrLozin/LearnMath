@@ -1,21 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { TeacherModel, TeacherPostRequestModel } from '../../models/teacher.model';
-import { TeacherService } from '../../services/teacher.service';
-import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { StudentPostRequestModel } from '../../models/student.model';
 
 @Component({
-  selector: 'app-register-teacher',
-  templateUrl: './register-teacher.component.html',
-  styleUrl: './register-teacher.component.scss'
+  selector: 'app-register-student',
+  templateUrl: './register-student.component.html',
+  styleUrl: './register-student.component.scss'
 })
-
-export class RegisterTeacherComponent{
+export class RegisterStudentComponent {
 
   constructor(
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
-    private teacherService: TeacherService
+    private studentService: StudentService
   ){}
   
   teacherForm = this.formBuilder.group({
@@ -50,11 +48,10 @@ export class RegisterTeacherComponent{
     return 
   }
 
-  mapToRequest(teacherForm: any): TeacherPostRequestModel {
+  mapToRequest(teacherForm: any): StudentPostRequestModel {
     return {
       firstName: teacherForm.firstName,
       lastName: teacherForm.lastName,
-      profession: teacherForm.profession,
       email: teacherForm.email,
       gender: parseInt(teacherForm.gender),
       address: {
@@ -66,4 +63,5 @@ export class RegisterTeacherComponent{
     }
   }
   
+}
 }

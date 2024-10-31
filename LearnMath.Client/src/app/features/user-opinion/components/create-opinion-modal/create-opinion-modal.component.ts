@@ -4,7 +4,7 @@ import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstra
 @Component({
   selector: 'app-create-opinion-modal',
   templateUrl: './create-opinion-modal.component.html',
-  styleUrl: './create-opinion-modal.component.scss',
+  styleUrl: './create-opinion-modal.component.scss'
 })
 export class CreateOpinionModalComponent {
   private modalService = inject(NgbModal);

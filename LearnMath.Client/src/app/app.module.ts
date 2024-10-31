@@ -27,6 +27,7 @@ import { CreateOpinionModalComponent } from './features/user-opinion/components/
     GetTeachersFilterComponent,
     RegisterTeacherComponent,
     EditTeacherComponent,
+    RegisterStudentComponent,
     AddressComponent,
     CreateOpinionComponent,
     CreateOpinionModalComponent,

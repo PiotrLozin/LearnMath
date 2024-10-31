@@ -8,7 +8,7 @@ import { UserOpinionPostRequestModel } from '../../models/user-opinion.model';
 @Component({
   selector: 'app-create-opinion',
   templateUrl: './create-opinion.component.html',
-  styleUrl: './create-opinion.component.scss'
+  styleUrl: './create-opinion.component.scss',
 })
 
 export class CreateOpinionComponent {
