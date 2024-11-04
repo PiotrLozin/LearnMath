@@ -20,6 +20,7 @@ import { GetTeacherOpinionsComponent } from './features/user-opinion/components/
 import { NavBarComponent } from './features/nav-bar/nav-bar.component';
 import { GetTeachersFilterComponent } from './features/teacher/components/get-teachers-filter/get-teachers-filter.component';
 import { CreateOpinionModalComponent } from './features/user-opinion/components/create-opinion-modal/create-opinion-modal.component';
+import { RegisterStudentComponent } from './features/student/components/register-student/register-student.component';
 
 @NgModule({
   declarations: [

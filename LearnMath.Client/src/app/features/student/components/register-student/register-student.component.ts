@@ -12,14 +12,12 @@ export class RegisterStudentComponent {
 
   constructor(
     private httpClient: HttpClient,
-    private formBuilder: FormBuilder,
-    private studentService: StudentService
+    private formBuilder: FormBuilder
   ){}
   
-  teacherForm = this.formBuilder.group({
+  studentForm = this.formBuilder.group({
     firstName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
     lastName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-    profession: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
     email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
     gender: ['', Validators.required],
     addressForm : this.formBuilder.group({
@@ -31,14 +29,14 @@ export class RegisterStudentComponent {
   })
   
   onSubmit() {
-    if (this.teacherForm.invalid)
-      console.error('Form is invalid', this.teacherForm.value);
+    if (this.studentForm.invalid)
+      console.error('Form is invalid', this.studentForm.value);
 
-    console.warn('Form data:', this.teacherForm.value);
+    console.warn('Form data:', this.studentForm.value);
 
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    let resource = this.mapToRequest(this.teacherForm.value);
-    this.httpClient.post("http://localhost:5074/teachers", resource, { headers }).subscribe(
+    let resource = this.mapToRequest(this.studentForm.value);
+    this.httpClient.post("http://localhost:5074/students", resource, { headers }).subscribe(
       res => {
         console.log('Server response', res);
       },
@@ -48,20 +46,18 @@ export class RegisterStudentComponent {
     return 
   }
 
-  mapToRequest(teacherForm: any): StudentPostRequestModel {
+  mapToRequest(studentForm: any): StudentPostRequestModel {
     return {
-      firstName: teacherForm.firstName,
-      lastName: teacherForm.lastName,
-      email: teacherForm.email,
-      gender: parseInt(teacherForm.gender),
+      firstName: studentForm.firstName,
+      lastName: studentForm.lastName,
+      email: studentForm.email,
+      gender: parseInt(studentForm.gender),
       address: {
-        street: teacherForm.addressForm.street,
-        city: teacherForm.addressForm.city,
-        country: teacherForm.addressForm.country,
-        postCode: teacherForm.addressForm. postCode
+        street: studentForm.addressForm.street,
+        city: studentForm.addressForm.city,
+        country: studentForm.addressForm.country,
+        postCode: studentForm.addressForm. postCode
       }
     }
   }
-  
-}
 }

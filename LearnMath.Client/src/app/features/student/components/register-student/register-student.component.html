@@ -1,5 +1,5 @@
 <div class="m-3" >
-    <form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
       <div class="mb-3 col-3">
         <label for="firstName" class="form-label">First Name</label>
         <input id="firstName" class="form-control" formControlName="firstName">
@@ -7,10 +7,6 @@
       <div class="mb-3 col-3">
         <label for="lastName" class="form-label">Last Name</label>
         <input id="lastName" class="form-control" formControlName="lastName">
-      </div>
-      <div class="mb-3 col-3">
-        <label for="profession" class="form-label">Profession</label>
-        <input id="profession" class="form-control" formControlName="profession">
       </div>
       <div class="mb-3 col-3">
         <label for="email" class="form-label">Email</label>
@@ -24,7 +20,7 @@
           <option value="1">Famale</option>
         </select>
       </div>
-      <teacher-address [addressForm]="teacherForm.controls.addressForm"></teacher-address>
+      <teacher-address [addressForm]="studentForm.controls.addressForm"></teacher-address>
       <button type="submit">Submit</button>
     </form>
   </div>
