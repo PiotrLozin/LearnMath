@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { TeacherModel, TeacherPostRequestModel } from '../../models/teacher.model';
 import { TeacherService } from '../../services/teacher.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-register-teacher',
   templateUrl: './register-teacher.component.html',
-  styleUrl: './register-teacher.component.scss'
+  styleUrl: './register-teacher.component.scss',
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {showError: true},
+    },
+  ]
 })
 
 export class RegisterTeacherComponent{
@@ -31,8 +38,16 @@ export class RegisterTeacherComponent{
       postCode: ['', Validators.compose([Validators.required])]
     })
   })
+
+  addressForm = this.formBuilder.group({
+    street: ['', Validators.compose([Validators.required])],
+    city: ['', Validators.compose([Validators.required])],
+    country: ['', Validators.compose([Validators.required])],
+    postCode: ['', Validators.compose([Validators.required])]
+  })
   
   onSubmit() {
+    this.teacherForm.value.addressForm = this.addressForm.value;
     if (this.teacherForm.invalid)
       console.error('Form is invalid', this.teacherForm.value);
 

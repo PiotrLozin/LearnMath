@@ -21,6 +21,10 @@ import { NavBarComponent } from './features/nav-bar/nav-bar.component';
 import { GetTeachersFilterComponent } from './features/teacher/components/get-teachers-filter/get-teachers-filter.component';
 import { CreateOpinionModalComponent } from './features/user-opinion/components/create-opinion-modal/create-opinion-modal.component';
 import { RegisterStudentComponent } from './features/student/components/register-student/register-student.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,11 @@ import { RegisterStudentComponent } from './features/student/components/register
       NgbDatepickerModule,
       RouterLinkActive,
       ReactiveFormsModule,
-      FontAwesomeModule        
+      FontAwesomeModule,
+      MatStepperModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatButtonModule,       
   ],
   providers: [
     importProvidersFrom(HttpClientModule)
