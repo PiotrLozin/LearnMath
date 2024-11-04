@@ -25,6 +25,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -59,10 +60,15 @@ import {MatStepperModule} from '@angular/material/stepper';
       MatButtonModule,       
   ],
   providers: [
-    importProvidersFrom(HttpClientModule)
+    importProvidersFrom(HttpClientModule),
+    provideAnimationsAsync()
   ],
   exports: [
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule, 
   ]
 })
 export class AppModule {

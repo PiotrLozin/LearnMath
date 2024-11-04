@@ -9,12 +9,6 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
   selector: 'app-register-teacher',
   templateUrl: './register-teacher.component.html',
   styleUrl: './register-teacher.component.scss',
-  providers: [
-    {
-      provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: {showError: true},
-    },
-  ]
 })
 
 export class RegisterTeacherComponent{
