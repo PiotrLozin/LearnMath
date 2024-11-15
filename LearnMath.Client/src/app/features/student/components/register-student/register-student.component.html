@@ -1,27 +1,83 @@
-<div class="m-3" >
-    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3 col-3">
-        <label for="firstName" class="form-label">First Name</label>
-        <input id="firstName" class="form-control" formControlName="firstName">
+<div class="container mt-3">
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    <!-- Krok 1: Dane Osobowe -->
+    <div *ngIf="currentStep === 1">
+      <h4>Step 1: Personal Information</h4>
+      <div class="mb-3">
+        <label>First Name</label>
+        <input type="text" class="form-control" formControlName="firstName" required>
       </div>
-      <div class="mb-3 col-3">
-        <label for="lastName" class="form-label">Last Name</label>
-        <input id="lastName" class="form-control" formControlName="lastName">
+      <div class="mb-3">
+        <label>Last Name</label>
+        <input type="text" class="form-control" formControlName="lastName" required>
       </div>
-      <div class="mb-3 col-3">
-        <label for="email" class="form-label">Email</label>
-        <input id="email" class="form-control" formControlName="email">
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" class="form-control" formControlName="email" required>
       </div>
-      <div class="mb-3 col-3">
-        <label for="gender" class="form-label">Gender</label>
-        <select class="form-control" formControlName="gender" aria-label="Default select example">
-          <option value="" disabled selected>Select your gender</option>
+      <div class="mb-3">
+        <label>Gender</label>
+        <select class="form-control" formControlName="gender" required>
+          <option value="" disabled>Select your gender</option>
           <option value="0">Male</option>
-          <option value="1">Famale</option>
+          <option value="1">Female</option>
+          <option value="2">Undefined</option>
         </select>
       </div>
-      <teacher-address [addressForm]="studentForm.controls.addressForm"></teacher-address>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+      <button type="button" class="btn btn-primary" (click)="goToStep(2)">Next</button>
+    </div>
+
+    <!-- Krok 2: Adres -->
+    <div *ngIf="currentStep === 2">
+      <h4>Step 2: Address</h4>
+      <form [formGroup]="addressForm">
+        <div class="mb-3 col-3">
+          <label for="street" class="form-label">Street</label>
+          <input id="street" class="form-control" formControlName="street">
+        </div>
+        <div class="mb-3 col-3">
+          <label for="city" class="form-label">City</label>
+          <input id="city" class="form-control" formControlName="city">
+        </div>
+        <div class="mb-3 col-3">
+          <label for="country" class="form-label">Country</label>
+          <input id="country" class="form-control" formControlName="country">
+        </div>
+        <div class="mb-3 col-3">
+          <label for="postCode" class="form-label">PostCode</label>
+          <input id="postCode" class="form-control" formControlName="postCode">
+        </div>
+      </form>
+      <button type="button" class="btn btn-secondary" (click)="goToStep(1)">Previous</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </form>
+</div>
+
+<!-- <div class="m-3" >
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3 col-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input id="firstName" class="form-control" formControlName="firstName">
+    </div>
+    <div class="mb-3 col-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input id="lastName" class="form-control" formControlName="lastName">
+    </div>
+    <div class="mb-3 col-3">
+      <label for="email" class="form-label">Email</label>
+      <input id="email" class="form-control" formControlName="email">
+    </div>
+    <div class="mb-3 col-3">
+      <label for="gender" class="form-label">Gender</label>
+      <select class="form-control" formControlName="gender" aria-label="Default select example">
+        <option value="" disabled selected>Select your gender</option>
+        <option value="0">Male</option>
+        <option value="1">Famale</option>
+      </select>
+    </div>
+    <teacher-address [addressForm]="studentForm.controls.addressForm"></teacher-address>
+    <button type="submit">Submit</button>
+  </form>
+</div> -->
   

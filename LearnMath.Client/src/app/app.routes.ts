@@ -4,11 +4,13 @@ import { TeacherComponent } from './features/teacher/components/get-all-teacher/
 import { RegisterTeacherComponent } from './features/teacher/pages/register-teacher/register-teacher.component';
 import { HomeComponent } from './features/home/home.component';
 import { EditTeacherComponent } from './features/teacher/pages/edit-teacher/edit-teacher.component';
+import { RegisterStudentComponent } from './features/student/components/register-student/register-student.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'teacher-component', component: TeacherComponent},
     { path: 'register-teacher-component', component: RegisterTeacherComponent},
     { path: 'app-edit-teacher/:id', component: EditTeacherComponent},
+    { path: 'register-student-component', component: RegisterStudentComponent},
     { path: '', redirectTo: '/home', pathMatch: 'full' } // Default route
 ];

@@ -9,6 +9,7 @@ import { StudentPostRequestModel } from '../../models/student.model';
   styleUrl: './register-student.component.scss'
 })
 export class RegisterStudentComponent {
+  currentStep: number = 1;
 
   constructor(
     private httpClient: HttpClient,
@@ -28,7 +29,38 @@ export class RegisterStudentComponent {
     })
   })
   
+  addressForm = this.formBuilder.group({
+    street: ['', Validators.compose([Validators.required])],
+    city: ['', Validators.compose([Validators.required])],
+    country: ['', Validators.compose([Validators.required])],
+    postCode: ['', Validators.compose([Validators.required])]
+  })
+
+  goToStep(step: number): void {
+    if (this.isStepValid(this.currentStep)) {
+      this.currentStep = step;
+    } else {
+      alert("Please fill in all required fields before proceeding.");
+    }
+  }
+
+  isStepValid(step: number): boolean | undefined {
+    if (step === 1) {
+      return this.studentForm.get('firstName')?.valid &&
+             this.studentForm.get('lastName')?.valid &&
+             this.studentForm.get('email')?.valid &&
+             this.studentForm.get('gender')?.valid;
+    } else if (step === 2) {
+      return this.studentForm.controls.addressForm.get('street')?.valid &&
+             this.studentForm.controls.addressForm.get('city')?.valid &&
+             this.studentForm.controls.addressForm.get('country')?.valid &&
+             this.studentForm.controls.addressForm.get('postCode')?.valid;
+    }
+    return false;
+  }
+
   onSubmit() {
+    this.studentForm.value.addressForm = this.addressForm.value;
     if (this.studentForm.invalid)
       console.error('Form is invalid', this.studentForm.value);
 
