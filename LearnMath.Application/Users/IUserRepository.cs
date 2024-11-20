@@ -11,6 +11,7 @@ namespace LearnMath.Application.Users
     public interface IUserRepository
     {
         Task<List<User>> GetAll(UserType userType);
+        IQueryable<User> GetUsers(UserType userType);
         Task<User?> GetById(int id);
         Task<int> Save(User entity);
         Task<int> Delete(User entity);

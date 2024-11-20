@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { TeacherModel, TeacherRequestModel } from '../../teacher.model';
-import { RegisterTeacherService } from '../../../register-teacher/service/register-teacher.service';
+import { TeacherModel, TeacherPostRequestModel } from '../../models/teacher.model';
 import { TeacherService } from '../../services/teacher.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-register-teacher',
   templateUrl: './register-teacher.component.html',
-  styleUrl: './register-teacher.component.scss'
+  styleUrl: './register-teacher.component.scss',
 })
 
 export class RegisterTeacherComponent{
@@ -20,13 +20,11 @@ export class RegisterTeacherComponent{
   ){}
   
   teacherForm = this.formBuilder.group({
-    firstName: ['Piotr', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-    lastName: ['Lozo', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-    profession: ['Math', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-    email: ['piotrloz', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+    firstName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+    lastName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+    profession: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+    email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
     gender: ['', Validators.required],
-    score: ['123', Validators.required],
-    numberOfOpinions: ['123', Validators.required],
     addressForm : this.formBuilder.group({
       street: ['', Validators.compose([Validators.required])],
       city: ['', Validators.compose([Validators.required])],
@@ -34,8 +32,16 @@ export class RegisterTeacherComponent{
       postCode: ['', Validators.compose([Validators.required])]
     })
   })
+
+  addressForm = this.formBuilder.group({
+    street: ['', Validators.compose([Validators.required])],
+    city: ['', Validators.compose([Validators.required])],
+    country: ['', Validators.compose([Validators.required])],
+    postCode: ['', Validators.compose([Validators.required])]
+  })
   
   onSubmit() {
+    this.teacherForm.value.addressForm = this.addressForm.value;
     if (this.teacherForm.invalid)
       console.error('Form is invalid', this.teacherForm.value);
 
@@ -53,15 +59,13 @@ export class RegisterTeacherComponent{
     return 
   }
 
-  mapToRequest(teacherForm: any): TeacherRequestModel {
+  mapToRequest(teacherForm: any): TeacherPostRequestModel {
     return {
       firstName: teacherForm.firstName,
       lastName: teacherForm.lastName,
       profession: teacherForm.profession,
       email: teacherForm.email,
       gender: parseInt(teacherForm.gender),
-      score: parseInt(teacherForm.score),
-      numberOfOpinions: parseInt(teacherForm.numberOfOpinions),
       address: {
         street: teacherForm.addressForm.street,
         city: teacherForm.addressForm.city,

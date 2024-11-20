@@ -1,0 +1,32 @@
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Add opinion</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <div *ngFor="let opinion of opinions">
+            <div class="container border my-3 p-3">
+                <div class="row row-cols-3">
+                    <div class="col">
+                        <p>Score: {{ opinion.score }}</p>
+                    </div>
+                    <div class="col">
+                        <p>Description: {{ opinion.description }}</p>
+                    </div>
+                    <div class="col">
+                        <p>Kraj: {{ opinion.createdByUser }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" [disabled]="isShowAllDisabled()" (click)="open(content)">All Opinions</button>
+
+<hr />
+
+<pre>{{ closeResult }}</pre>

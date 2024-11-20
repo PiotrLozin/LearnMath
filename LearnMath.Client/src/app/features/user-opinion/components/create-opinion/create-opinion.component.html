@@ -1,0 +1,24 @@
+<form [formGroup]="userOpinionForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3 col-3">
+    <label for="score" class="form-label">Score</label>
+    <div class="star-rating">
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+        <input type="radio" formControlName="score" [id]="'star' + star" [value]="'' + star" class="form-check-input">
+        <label [for]="'star' + star" class="form-check-label">&#9733;</label>
+      </ng-container>
+    </div>
+  </div>
+  <div class="mb-3 col-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea id="description" class="form-control" formControlName="description" rows="3"></textarea>
+  </div>
+  <div class="mb-3 col-3">
+    <label for="creatorId" class="form-label">Creator ID</label>
+    <input id="creatorId" class="form-control" formControlName="creatorId">
+  </div>
+  <div class="mb-3 col-3">
+    <label for="teacherId" class="form-label">Teacher ID</label>
+    <input id="teacherId" class="form-control" formControlName="teacherId">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

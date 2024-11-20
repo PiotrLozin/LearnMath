@@ -1,4 +1,5 @@
 ﻿using LearnMath.Application.Teachers;
+using LearnMath.Application.Teachers.Dtos;
 using LearnMath.Application.Teachers.Queries;
 using LearnMath.Application.Users.Commands;
 using LearnMath.Application.Users.Requests;
@@ -21,12 +22,30 @@ namespace LearnMath.Api.Controllers
             _mediator = mediator;
         }
 
+        //[HttpGet]
+        //[ProducesResponseType(typeof(List<TeacherDto>), (int)HttpStatusCode.OK)]
+        //[ProducesResponseType((int)HttpStatusCode.NotFound)]
+        //public async Task<IActionResult> Get()
+        //{
+        //    var query = new GetAllTeachersQuery();
+        //    var response = await _mediator.Send(query);
+
+        //    return Ok(response.Teachers);
+        //}
+
         [HttpGet]
         [ProducesResponseType(typeof(List<TeacherDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetByFilter([FromQuery]TeacherFilterDto teacherFilterDto)
         {
-            var query = new GetAllTeachersQuery();
+            var query = new GetTeachersByFilterQuery() 
+            {
+                Subject = teacherFilterDto.Subject,
+                City = teacherFilterDto.City,
+                Score = teacherFilterDto.Score,
+                Distance = teacherFilterDto.Distance,
+            };
+
             var response = await _mediator.Send(query);
 
             return Ok(response.Teachers);

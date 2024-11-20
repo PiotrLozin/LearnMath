@@ -1,0 +1,95 @@
+<div *ngFor="let teacher of teachers">
+  <div class="container border my-3 p-3">
+    <div class="row row-cols-3">
+      <!-- Left Column: Image, Opinions, Basic Info -->
+      <div class="col">
+        <div class="d-flex flex-column">
+          <!-- Placeholder for Image -->
+          <div class="mb-3">
+            <img src="path/to/placeholder-image.jpg" class="img-fluid" alt="Image">
+            <b>{{ teacher.firstName }} {{ teacher.lastName }}</b>
+          </div>
+          <!-- Opinions and Rating -->
+          <div class="mb-3">
+            <span>Liczba opinii: </span>
+            <span>Średnia ocen: </span>
+          </div>
+          <!-- Basic Info: Name, Email, Profession -->
+          <div>
+            <p>{{ teacher.email }}</p>
+            <p>{{ teacher.profession }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Middle Column: Address Info -->
+      <div class="col">
+        <p>Ulica: {{ teacher.address.street }}</p>
+        <p>Miasto: {{ teacher.address.city }}</p>
+        <p>Kraj: {{ teacher.address.country }}</p>
+        <p>Kod pocztowy: {{ teacher.address.postCode }}</p>
+      </div>
+  
+      <!-- Right Column: Calendar -->
+      <div class="col">
+        <div class="border p-3">
+          <h5>Dostępne godziny</h5>
+          <!-- Placeholder for Calendar or Available Hours Component -->
+          <div>
+            <p>Wpisz tutaj dostępne godziny dla {{ teacher.firstName }}.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary" (click)="onEdit(teacher.id)">Edit</button>
+        <button class="btn btn-warning" (click)="onDelete(teacher.id)">Del</button>
+      </div>
+      <div class="col">
+        <div class="opinion-container">
+          <app-get-teacher-opinions [teacherId]="teacher.id" [totalOpinions]="teacher.totalOpinions"></app-get-teacher-opinions>
+        </div>
+      </div>
+      <div class="col">
+        <div class="opinion-container">
+          <app-create-opinion-modal></app-create-opinion-modal>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<!-- <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Profession</th>
+      <th scope="col">Email</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Street</th>
+      <th scope="col">City</th>
+      <th scope="col">Country</th>
+      <th scope="col">PostCode</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of teachers; track item){
+    <tr>
+      <td>{{item.firstName}}</td>
+      <td>{{item.lastName}}</td>
+      <td>{{item.profession}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.gender}}</td>
+      <td>{{item.address.street}}</td>
+      <td>{{item.address.city}}</td>
+      <td>{{item.address.country}}</td>
+      <td>{{item.address.postCode}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="onEdit(item.id)">Edit</button>
+        <button class="btn btn-warning" (click)="onDelete(item.id)">Del</button>
+      </td>
+    </tr>
+  }
+  </tbody>
+</table> -->

@@ -396,6 +396,7 @@ yarn-error.log
 
 # Miscellaneous
 /.angular/cache
+/.angular/cache/*/vite/
 .sass-cache/
 /connect.lock
 /coverage
@@ -408,3 +409,6 @@ testem.log
 Thumbs.db
 /Database
 /DB_browser
+/LearnMath.Client/.angular/cache/18.2.11/vite/deps
+/LearnMath.Client/.angular/cache/18.2.11/.tsbuildinfo
+/LearnMath.Client/.angular/cache/18.2.11/LearnMath.Client

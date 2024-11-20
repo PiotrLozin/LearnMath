@@ -28,6 +28,7 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
                 {
                     var dto = teacher.MapToTeacherDto();
                     dto.Address = teacher.Address.MapToAddressDto();
+
                     return dto;
                 }).ToList();
             return new GetAllTeacherResponse(teachersDto);

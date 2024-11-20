@@ -1,19 +1,20 @@
 <form [formGroup]="addressForm">
-    <div class="mb-3 col-3">
-      <label for="street" class="form-label">Street</label>
-      <input id="street" class="form-control" formControlName="street">
-    </div>
-    <div class="mb-3 col-3">
-      <label for="city" class="form-label">City</label>
-      <input id="city" class="form-control" formControlName="city">
-    </div>
-    <div class="mb-3 col-3">
-      <label for="country" class="form-label">Country</label>
-      <input id="country" class="form-control" formControlName="country">
-    </div>
-    <div class="mb-3 col-3">
-      <label for="postCode" class="form-label">PostCode</label>
-      <input id="postCode" class="form-control" formControlName="postCode">
-    </div>
+  <ng-template matStepLabel>Fill out your address</ng-template>
+  <mat-form-field>
+    <mat-label>Street</mat-label>
+    <input matInput placeholder="Street" formControlName="street" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>City</mat-label>
+    <input matInput placeholder="City" formControlName="city" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Country</mat-label>
+    <input matInput placeholder="Country" formControlName="country" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>PostCode</mat-label>
+    <input matInput placeholder="PostCode" formControlName="postCode" required>
+  </mat-form-field>
 </form>
   
