@@ -396,7 +396,7 @@ yarn-error.log
 
 # Miscellaneous
 /.angular/cache
-/.angular\cache\18.2.11\LearnMath.Client\vite\deps
+/.angular/cache/*/vite/
 .sass-cache/
 /connect.lock
 /coverage
