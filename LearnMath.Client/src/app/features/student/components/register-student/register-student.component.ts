@@ -51,10 +51,10 @@ export class RegisterStudentComponent {
              this.studentForm.get('email')?.valid &&
              this.studentForm.get('gender')?.valid;
     } else if (step === 2) {
-      return this.studentForm.controls.addressForm.get('street')?.valid &&
-             this.studentForm.controls.addressForm.get('city')?.valid &&
-             this.studentForm.controls.addressForm.get('country')?.valid &&
-             this.studentForm.controls.addressForm.get('postCode')?.valid;
+      return this.addressForm.get('street')?.valid &&
+             this.addressForm.get('city')?.valid &&
+             this.addressForm.get('country')?.valid &&
+             this.addressForm.get('postCode')?.valid;
     }
     return false;
   }

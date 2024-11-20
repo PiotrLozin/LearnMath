@@ -43,6 +43,16 @@ namespace LearnMath.Infrastructure.Users
             return users;
         }
 
+        public IQueryable<User> GetUsers(UserType userType)
+        {
+            var users = _context.Users
+                .Include(x => x.Address)
+                .Include(x => x.Opinions)
+                .Where(u => u.UserType == userType);
+
+            return users;
+        }
+
         public async Task<User?> GetById(int id)
         {
             var user = await _context.Users.Include(x => x.Address).SingleOrDefaultAsync(x => x.Id == id);

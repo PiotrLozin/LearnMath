@@ -10,6 +10,8 @@ namespace LearnMath.Application.Teachers.Responses
 {
     public class GetAllTeacherResponse
     {
+        public bool IsError { get; set; } = false;
+        public List<string> Errors { get; set; }
         public List<TeacherDto> Teachers { get; set; }
         public GetAllTeacherResponse(List<TeacherDto> teachers)
         {
