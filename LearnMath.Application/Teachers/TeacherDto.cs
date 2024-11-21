@@ -14,7 +14,7 @@ namespace LearnMath.Application.Teachers
             int id,
             string? firstName,
             string? lastName,
-            string? profession,
+            Subject profession,
             string? email,
             Gender gender,
             int totalOpinions
@@ -31,7 +31,7 @@ namespace LearnMath.Application.Teachers
         public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public string? Profession { get; set; }
+        public Subject Profession { get; set; }
         public string? Email { get; set; }
         public Gender Gender { get; set; }
         public AddressDto Address { get; set; }

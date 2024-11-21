@@ -1,4 +1,5 @@
 ﻿using LearnMath.Application.Teachers.Responses;
+using LearnMath.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace LearnMath.Application.Teachers.Queries
 {
     public class GetTeachersByFilterQuery : IRequest<GetAllTeacherResponse>
     {
-        public string Subject { get; set; }
+        public Subject? Subject { get; set; }
         public string City { get; set; }
         public int Score { get; set; }
         public int Distance { get; set; }

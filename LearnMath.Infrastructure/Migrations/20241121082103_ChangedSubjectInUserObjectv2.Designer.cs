@@ -3,6 +3,7 @@ using System;
 using LearnMath.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LearnMath.Infrastructure.Migrations
 {
     [DbContext(typeof(LearnMathContext))]
-    partial class LearnMathContextModelSnapshot : ModelSnapshot
+    [Migration("20241121082103_ChangedSubjectInUserObjectv2")]
+    partial class ChangedSubjectInUserObjectv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.31");

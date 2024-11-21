@@ -11,7 +11,7 @@ namespace LearnMath.Domain
         public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public string? Profession { get; set; }
+        public Subject Profession { get; set; }
         public string? Email { get; set; }
         public Gender Gender { get; set; }
         public Address Address { get; set; }
@@ -23,7 +23,7 @@ namespace LearnMath.Domain
             int id,
             string firstName,
             string lastName,
-            string profession,
+            Subject profession,
             string email,
             Gender gender,
             Address address,

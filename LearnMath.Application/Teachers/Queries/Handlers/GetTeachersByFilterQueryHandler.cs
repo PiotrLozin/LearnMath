@@ -2,6 +2,7 @@
 using LearnMath.Application.Teachers.Responses;
 using LearnMath.Application.Users;
 using LearnMath.Application.Users.MappingProfiles;
+using LearnMath.Domain;
 using LearnMath.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -31,9 +32,9 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
 
             var userQuery = _userRepository.GetUsers(UserType.Teacher);
 
-            if (!string.IsNullOrEmpty(request.Subject))
+            if (request.Subject.HasValue)
             {
-                userQuery = userQuery.Where(user => user.Profession.Contains(request.Subject));
+                userQuery = userQuery.Where(user => user.Profession == request.Subject);
             }
 
             if (!string.IsNullOrEmpty(request.City))

@@ -13,7 +13,7 @@ namespace LearnMath.Domain
             int id,
             string firstName,
             string lastName,
-            string profession,
+            Subject profession,
             string email,
             Gender gender,
             Address address
