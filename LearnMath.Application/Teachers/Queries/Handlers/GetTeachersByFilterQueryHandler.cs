@@ -34,7 +34,7 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
 
             if (request.Subject.HasValue)
             {
-                userQuery = userQuery.Where(user => user.Profession == request.Subject);
+                userQuery = userQuery.Where(user => user.UserSubjects.Any(us => us.Subject == request.Subject.Value));
             }
 
             if (!string.IsNullOrEmpty(request.City))
@@ -56,6 +56,7 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
             var teachersDto = teachers.Select(teacher =>
             {
                 var dto = teacher.MapToTeacherDto();
+                dto.Subjects = teacher.UserSubjects.Select(us => us.Subject).ToList();
                 dto.Address = teacher.Address.MapToAddressDto();
 
                 return dto;

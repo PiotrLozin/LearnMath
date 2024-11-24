@@ -47,6 +47,7 @@ namespace LearnMath.Infrastructure.Users
         {
             var users = _context.Users
                 .Include(x => x.Address)
+                .Include(x => x.UserSubjects)
                 .Include(x => x.Opinions)
                 .Where(u => u.UserType == userType);
 
@@ -55,7 +56,11 @@ namespace LearnMath.Infrastructure.Users
 
         public async Task<User?> GetById(int id)
         {
-            var user = await _context.Users.Include(x => x.Address).SingleOrDefaultAsync(x => x.Id == id);
+            var user = await _context.Users
+                .Include(x => x.Address)
+                .Include(x => x.UserSubjects)
+                .Include(x => x.Opinions)
+                .SingleOrDefaultAsync(x => x.Id == id);
 
             return user;
         }

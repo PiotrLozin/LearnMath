@@ -23,6 +23,7 @@ import { CreateOpinionModalComponent } from './features/user-opinion/components/
 import { RegisterStudentComponent } from './features/student/components/register-student/register-student.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -57,7 +58,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
       MatStepperModule,
       MatFormFieldModule,
       MatInputModule,
-      MatButtonModule,       
+      MatButtonModule,
+      MatSelectModule       
   ],
   providers: [
     importProvidersFrom(HttpClientModule),

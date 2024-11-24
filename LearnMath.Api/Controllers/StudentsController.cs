@@ -39,6 +39,9 @@ namespace LearnMath.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> SaveStudent([FromBody] CreateUserRequest request)
         {
+            // Student subject field should be empty.
+            request.Subjects = new List<Subject>();
+
             var command = new CreateUserCommand(request, UserType.Student);
             var result = await _mediator.Send(command);
 

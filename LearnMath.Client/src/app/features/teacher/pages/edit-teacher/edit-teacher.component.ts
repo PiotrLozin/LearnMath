@@ -78,7 +78,6 @@ export class EditTeacherComponent implements OnInit{
     return {
       firstName: teacherForm.firstName,
       lastName: teacherForm.lastName,
-      profession: teacherForm.profession,
       email: teacherForm.email,
       gender: parseInt(teacherForm.gender),
       addressForm: {

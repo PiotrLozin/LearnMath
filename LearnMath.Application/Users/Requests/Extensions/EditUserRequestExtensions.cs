@@ -24,14 +24,8 @@ namespace LearnMath.Application.Users.Requests.Extensions
                 throw new ArgumentException($"Invalid gender value: {request.Gender}", nameof(request.Gender));
             }
 
-            if (!Enum.IsDefined(typeof(Subject), request.Profession))
-            {
-                throw new ArgumentException($"Invalid gender value: {request.Profession}", nameof(request.Profession));
-            }
-
             teacher.FirstName = request.FirstName;
             teacher.LastName = request.LastName;
-            teacher.Profession = request.Profession;
             teacher.Email = request.Email;
             teacher.Gender = request.Gender;
             teacher.Address = request.AddressForm.EditAddress(teacher.Address);

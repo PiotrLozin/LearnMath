@@ -4,7 +4,7 @@ export interface TeacherModel{
     id: number;
     firstName: string;
     lastName: string;
-    profession: string;
+    subjects: [];
     email: string;
     gender: string;
     address: AddressModel;
@@ -14,7 +14,7 @@ export interface TeacherModel{
 export interface TeacherPostRequestModel{
     firstName: string;
     lastName: string;
-    profession: string;
+    subjects: [];
     email: string;
     gender: number;
     address: AddressModel;
@@ -23,7 +23,6 @@ export interface TeacherPostRequestModel{
 export interface TeacherEditRequestModel{
     firstName: string;
     lastName: string;
-    profession: string;
     email: string;
     gender: number;
     addressForm: AddressModel;

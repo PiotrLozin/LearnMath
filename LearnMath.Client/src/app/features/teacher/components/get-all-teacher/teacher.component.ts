@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeacherModel } from '../../models/teacher.model';
 import { TeacherService } from '../../services/teacher.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserSubject } from '../../enums/userSubject';
 
 @Component({
   selector: 'app-teacher',
@@ -17,6 +18,15 @@ export class TeacherComponent implements OnInit{
     private router: Router,
     private route: ActivatedRoute
   ){}
+
+  getSubjectNames(subjectIds: number[] | null): string[] {
+    if (!subjectIds || subjectIds.length === 0) {
+      return ['No subjects assigned']; // lub inny tekst domyślny
+    }
+    return subjectIds
+    .map(id => UserSubject[id]) // Rzutowanie `id` na klucz enuma
+    .filter(name => typeof name === 'string'); // Filtracja, aby uniknąć błędów
+  }
 
   ngOnInit(): void {
     this.loadTeachers();
