@@ -17,7 +17,7 @@
           <!-- Basic Info: Name, Email, Profession -->
           <div>
             <p>{{ teacher.email }}</p>
-            <p>{{ teacher.profession }}</p>
+            <p>{{ getSubjectNames(teacher.subjects).join(', ') }}</p>
           </div>
         </div>
       </div>

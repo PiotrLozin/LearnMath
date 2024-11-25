@@ -26,7 +26,6 @@ namespace LearnMath.Application.Users.Requests.Extensions
 
             teacher.FirstName = request.FirstName;
             teacher.LastName = request.LastName;
-            teacher.Profession = request.Profession;
             teacher.Email = request.Email;
             teacher.Gender = request.Gender;
             teacher.Address = request.AddressForm.EditAddress(teacher.Address);

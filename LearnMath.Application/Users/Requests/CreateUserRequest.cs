@@ -12,7 +12,7 @@ namespace LearnMath.Application.Users.Requests
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public string? Profession { get; set; }
+        public List<Subject>? Subjects { get; set; }
         public string? Email { get; set; }
         public Gender Gender { get; set; }
         public AddressDto Address { get; set; }

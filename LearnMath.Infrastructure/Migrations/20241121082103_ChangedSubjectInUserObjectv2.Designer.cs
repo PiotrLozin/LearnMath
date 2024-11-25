@@ -3,6 +3,7 @@ using System;
 using LearnMath.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LearnMath.Infrastructure.Migrations
 {
     [DbContext(typeof(LearnMathContext))]
-    partial class LearnMathContextModelSnapshot : ModelSnapshot
+    [Migration("20241121082103_ChangedSubjectInUserObjectv2")]
+    partial class ChangedSubjectInUserObjectv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.31");
@@ -65,6 +67,9 @@ namespace LearnMath.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Profession")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("UserType")
                         .HasColumnType("INTEGER");
 
@@ -102,25 +107,6 @@ namespace LearnMath.Infrastructure.Migrations
                     b.ToTable("Opinions");
                 });
 
-            modelBuilder.Entity("LearnMath.Domain.UserSubject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Subject")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("UserSubject");
-                });
-
             modelBuilder.Entity("LearnMath.Domain.User", b =>
                 {
                     b.HasOne("LearnMath.Domain.Address", "Address")
@@ -143,22 +129,9 @@ namespace LearnMath.Infrastructure.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("LearnMath.Domain.UserSubject", b =>
-                {
-                    b.HasOne("LearnMath.Domain.User", "Teacher")
-                        .WithMany("UserSubjects")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Teacher");
-                });
-
             modelBuilder.Entity("LearnMath.Domain.User", b =>
                 {
                     b.Navigation("Opinions");
-
-                    b.Navigation("UserSubjects");
                 });
 #pragma warning restore 612, 618
         }

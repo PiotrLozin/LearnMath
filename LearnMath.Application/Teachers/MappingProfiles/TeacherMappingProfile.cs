@@ -1,5 +1,6 @@
 ﻿using LearnMath.Application.Addresses;
 using LearnMath.Domain;
+using LearnMath.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,6 @@ namespace LearnMath.Application.Teachers.MappingProfiles
                 teacher.Id,
                 teacher.FirstName,
                 teacher.LastName,
-                teacher.Profession,
                 teacher.Email,
                 teacher.Gender,
                 total);

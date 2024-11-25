@@ -31,6 +31,7 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
             }
 
             var teacherDto = teacher.MapToTeacherDto();
+            teacherDto.Subjects = teacher.UserSubjects.Select(us => us.Subject).ToList();
             teacherDto.Address = teacher.Address.MapToAddressDto();
             
             return teacherDto;

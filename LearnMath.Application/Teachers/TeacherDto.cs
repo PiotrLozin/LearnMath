@@ -1,4 +1,5 @@
 ﻿using LearnMath.Application.Addresses;
+using LearnMath.Domain;
 using LearnMath.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ namespace LearnMath.Application.Teachers
             int id,
             string? firstName,
             string? lastName,
-            string? profession,
             string? email,
             Gender gender,
             int totalOpinions
@@ -23,7 +23,6 @@ namespace LearnMath.Application.Teachers
             Id = id;
             FirstName = firstName;
             LastName = lastName;
-            Profession = profession;
             Email = email;
             Gender = gender;
             TotalOpinions = totalOpinions;
@@ -31,7 +30,7 @@ namespace LearnMath.Application.Teachers
         public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public string? Profession { get; set; }
+        public List<Subject> Subjects { get; set; }
         public string? Email { get; set; }
         public Gender Gender { get; set; }
         public AddressDto Address { get; set; }

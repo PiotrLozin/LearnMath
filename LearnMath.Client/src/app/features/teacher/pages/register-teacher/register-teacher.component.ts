@@ -3,7 +3,7 @@ import { TeacherModel, TeacherPostRequestModel } from '../../models/teacher.mode
 import { TeacherService } from '../../services/teacher.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { UserSubject } from '../../enums/userSubject';
 
 @Component({
   selector: 'app-register-teacher',
@@ -13,16 +13,24 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 export class RegisterTeacherComponent{
 
+  // Lista opcji oparta na enumie Subject
+  subjectList: { value: UserSubject; label: string }[] = [];
+
   constructor(
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
     private teacherService: TeacherService
-  ){}
+  ){
+    // Tworzenie tablicy z wartości enuma
+    this.subjectList = Object.keys(UserSubject)
+      .filter(key => isNaN(Number(key))) // Filtruje klucze będące nazwami
+      .map(key => ({ value: UserSubject[key as keyof typeof UserSubject], label: key }));
+  }
   
   teacherForm = this.formBuilder.group({
     firstName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
     lastName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-    profession: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+    subjects: [[], Validators.required],
     email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
     gender: ['', Validators.required],
     addressForm : this.formBuilder.group({
@@ -63,7 +71,7 @@ export class RegisterTeacherComponent{
     return {
       firstName: teacherForm.firstName,
       lastName: teacherForm.lastName,
-      profession: teacherForm.profession,
+      subjects: teacherForm.subjects,
       email: teacherForm.email,
       gender: parseInt(teacherForm.gender),
       address: {
