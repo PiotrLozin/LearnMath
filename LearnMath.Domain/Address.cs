@@ -7,6 +7,8 @@
         public string City { get; set; }
         public string Country { get; set; }
         public string PostCode { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
         public Address() { }
         public Address(Guid id, string street, string city, string country, string postCode) 

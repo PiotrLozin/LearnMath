@@ -1,4 +1,5 @@
 ﻿using LearnMath.Application.Addresses;
+using LearnMath.Application.OpenStreetMap;
 using LearnMath.Domain;
 using LearnMath.Domain.Enums;
 using System;
@@ -12,7 +13,7 @@ namespace LearnMath.Application.Users.Requests.Extensions
 {
     public static class CreateUserRequestExtensions
     {
-        public static User MapToUser(this CreateUserRequest request, UserType userType)
+        public static async Task<User> MapToUserAsync(this CreateUserRequest request, UserType userType)
         {
             if (request is null)
             {
@@ -35,7 +36,7 @@ namespace LearnMath.Application.Users.Requests.Extensions
                 request.LastName,
                 request.Email,
                 request.Gender,
-                request.Address.MapToAddress(),
+                await request.Address.MapToAddress(),
                 userType)
             {
                 UserSubjects = request.Subjects
@@ -46,7 +47,7 @@ namespace LearnMath.Application.Users.Requests.Extensions
             return userEntity;
         }
 
-        public static Address MapToAddress(this AddressDto request)
+        public static async Task<Address> MapToAddress(this AddressDto request)
         {
             Address address = new Address(
                 Guid.Empty,
@@ -54,6 +55,10 @@ namespace LearnMath.Application.Users.Requests.Extensions
                 request.City,
                 request.Country,
                 request.PostCode);
+
+            Coordinates coordinates = await OsmExtension.GetCoordinates(request.City);
+            address.Latitude = coordinates.Latitude;
+            address.Longitude = coordinates.Longitude;
 
             return address;
         }

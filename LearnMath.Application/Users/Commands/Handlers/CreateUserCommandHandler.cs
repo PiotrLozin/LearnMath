@@ -1,4 +1,5 @@
-﻿using LearnMath.Application.Teachers;
+﻿using LearnMath.Application.OpenStreetMap;
+using LearnMath.Application.Teachers;
 using LearnMath.Application.Users.Requests.Extensions;
 using LearnMath.Domain.Enums;
 using MediatR;
@@ -19,7 +20,7 @@ namespace LearnMath.Application.Users.Commands.Handlers
         }
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var userEntity = request.UserRequest.MapToUser(request.UserType);
+            var userEntity = await request.UserRequest.MapToUserAsync(request.UserType);
 
             var result = await _userRepository.Save(userEntity);
 
