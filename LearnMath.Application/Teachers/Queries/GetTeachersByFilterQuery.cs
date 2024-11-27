@@ -12,7 +12,7 @@ namespace LearnMath.Application.Teachers.Queries
     public class GetTeachersByFilterQuery : IRequest<GetAllTeacherResponse>
     {
         public Subject? Subject { get; set; }
-        public string City { get; set; }
+        public string? City { get; set; }
         public int Score { get; set; }
         public int Distance { get; set; }
     }

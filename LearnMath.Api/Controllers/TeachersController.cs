@@ -22,17 +22,6 @@ namespace LearnMath.Api.Controllers
             _mediator = mediator;
         }
 
-        //[HttpGet]
-        //[ProducesResponseType(typeof(List<TeacherDto>), (int)HttpStatusCode.OK)]
-        //[ProducesResponseType((int)HttpStatusCode.NotFound)]
-        //public async Task<IActionResult> Get()
-        //{
-        //    var query = new GetAllTeachersQuery();
-        //    var response = await _mediator.Send(query);
-
-        //    return Ok(response.Teachers);
-        //}
-
         [HttpGet]
         [ProducesResponseType(typeof(List<TeacherDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
