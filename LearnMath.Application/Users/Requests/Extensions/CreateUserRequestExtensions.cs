@@ -56,7 +56,14 @@ namespace LearnMath.Application.Users.Requests.Extensions
                 request.Country,
                 request.PostCode);
 
-            Coordinates coordinates = await OsmExtension.GetCoordinates(request.City);
+            Coordinates coordinates = 
+                await OsmExtension.GetCoordinates(request.City, request.PostCode);
+
+            if (coordinates == new Coordinates(0, 0))
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             address.Latitude = coordinates.Latitude;
             address.Longitude = coordinates.Longitude;
 

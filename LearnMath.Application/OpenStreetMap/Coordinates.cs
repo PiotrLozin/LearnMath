@@ -16,6 +16,18 @@ namespace LearnMath.Application.OpenStreetMap
             Latitude = latitude;
             Longitude = longitude;
         }
+
+        public override bool Equals(object obj)
+        {
+            // Sprawdź, czy obj to instancja Coordinates
+            if (obj is Coordinates other)
+            {
+                return Latitude == other.Latitude 
+                    && Longitude == other.Longitude;
+            }
+
+            return false;
+        }
     }
 
 }

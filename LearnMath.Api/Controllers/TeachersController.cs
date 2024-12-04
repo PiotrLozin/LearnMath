@@ -31,6 +31,7 @@ namespace LearnMath.Api.Controllers
             {
                 Subject = teacherFilterDto.Subject,
                 City = teacherFilterDto.City,
+                PostalCode = teacherFilterDto.PostalCode,
                 Score = teacherFilterDto.Score,
                 Distance = teacherFilterDto.Distance,
             };
