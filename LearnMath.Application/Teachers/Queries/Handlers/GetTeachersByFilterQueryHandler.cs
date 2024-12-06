@@ -30,28 +30,7 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
         {
             var userQuery = _userRepository.GetUsers(UserType.Teacher);
 
-            if (request.Distance > 0 && !string.IsNullOrEmpty(request.City))
-            {
-                Coordinates requestedCoordinates = await OsmExtension.GetCoordinates(request.City, request.PostalCode);
-                if (requestedCoordinates.Equals(new Coordinates(0, 0)))
-                {
-                    throw new ArgumentNullException("The specified address could not be found");
-                }
-                const double EarthRadiusKm = 6371.0;
-
-                userQuery = userQuery.Where(user =>
-                    user.Address.Latitude != 0 && user.Address.Longitude != 0 && // Pomijamy niepełne adresy
-                    (EarthRadiusKm *
-                    
-                     Math.Acos(
-                         Math.Cos((requestedCoordinates.Latitude * Math.PI / 180.0)) *
-                         Math.Cos((user.Address.Latitude * Math.PI / 180.0)) *
-                         Math.Cos((user.Address.Longitude * Math.PI / 180.0) - (requestedCoordinates.Longitude * Math.PI / 180.0)) +
-                         Math.Sin((requestedCoordinates.Latitude * Math.PI / 180.0)) *
-                         Math.Sin((user.Address.Latitude * Math.PI / 180.0))
-                     )) <= request.Distance);
-            }
-            else if (request.Distance == 0 && !string.IsNullOrEmpty(request.City))
+            if (request.Distance == 0 && !string.IsNullOrEmpty(request.City))
             {
                 userQuery = userQuery.Where(user => EF.Functions.Like(user.Address.City, $"%{request.City}%"));
             }
@@ -66,12 +45,14 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
                 userQuery = userQuery;
             }
 
-            if (request.Score > 0)
+            var teachers = await userQuery.ToListAsync();
+
+            if (teachers.Count > 0 && request.Distance > 0 && !string.IsNullOrEmpty(request.City))
             {
-                userQuery = userQuery;
+                // Filtering locations by distance - It should be moved to the SQL in a future
+                teachers = await GetUsersInRequestedDistance(teachers, request.City, request.PostalCode, request.Distance);
             }
 
-            var teachers = await userQuery.ToListAsync();
             var teachersDto = teachers.Select(teacher =>
             {
                 var dto = teacher.MapToTeacherDto();
@@ -82,6 +63,34 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
             }).ToList();
 
             return new GetAllTeacherResponse(teachersDto);
+        }
+
+        private static async Task<List<User>> GetUsersInRequestedDistance(
+            List<User> teachers,
+            string city,
+            string postalCode,
+            int distance)
+        {
+            Coordinates requestedCoordinates = await OsmExtension.GetCoordinates(city, postalCode);
+            if (requestedCoordinates.Equals(new Coordinates(0, 0)))
+            {
+                throw new ArgumentNullException("The specified address could not be found");
+            }
+            const double EarthRadiusKm = 6371.0;
+
+            teachers = (List<User>)teachers.Where(user =>
+                user.Address.Latitude != 0 && user.Address.Longitude != 0 && // Pomijamy niepełne adresy
+                (EarthRadiusKm *
+
+                    Math.Acos(
+                        Math.Cos(DegreeToRadian(requestedCoordinates.Latitude)) *
+                        Math.Cos(DegreeToRadian(user.Address.Latitude)) *
+                        Math.Cos(DegreeToRadian(user.Address.Longitude) - DegreeToRadian(requestedCoordinates.Longitude)) +
+                        Math.Sin(DegreeToRadian(requestedCoordinates.Latitude)) *
+                        Math.Sin(DegreeToRadian(user.Address.Latitude))
+                    )) <= distance).ToList();
+
+            return teachers;
         }
 
         private static double DegreeToRadian(double degree)
