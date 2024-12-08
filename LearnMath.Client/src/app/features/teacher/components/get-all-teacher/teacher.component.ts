@@ -35,6 +35,10 @@ export class TeacherComponent implements OnInit{
     });
   }
 
+  onFiltersApplied(filters: any): void {
+    this.loadTeachersWithFilter(filters);
+  }
+
   onDelete(id: number): void {
     this.teacherService.deleteTeacher(id).subscribe(() => {
       this.loadTeachers();
@@ -48,6 +52,12 @@ export class TeacherComponent implements OnInit{
 
   private loadTeachers(): void {
     this.teacherService.getTeachers().subscribe((teachers: any) => {
+      this.teachers = [...teachers];
+    });
+  }
+
+  private loadTeachersWithFilter(filters: any): void {
+    this.teacherService.getTeachersWithFilters(filters).subscribe((teachers: any) => {
       this.teachers = [...teachers];
     });
   }
