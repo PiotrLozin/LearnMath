@@ -19,5 +19,16 @@
             Country = country;
             PostCode = postCode;
         }
+
+        public Address(Guid id, string street, string city, string country, string postCode, double latitude, double longitude)
+        {
+            Id = id;
+            Street = street;
+            City = city;
+            Country = country;
+            PostCode = postCode;
+            Latitude = latitude;
+            Longitude = longitude;
+        }
     }
 }

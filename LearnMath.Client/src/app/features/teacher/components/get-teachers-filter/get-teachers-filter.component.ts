@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./get-teachers-filter.component.scss']
 })
 export class GetTeachersFilterComponent {
+  @Input() filters = { subject: '', city: '', postalCode: '', score: null, distance: null };
   @Output() filtersApplied = new EventEmitter<any>();
+  @Output() onFilterApply = new EventEmitter<any>();
 
   filterForm: FormGroup;
   subjects = [
@@ -39,5 +41,6 @@ export class GetTeachersFilterComponent {
     }
 
     this.filtersApplied.emit(filters);
+    this.onFilterApply.emit(this.filters);
   }
 }

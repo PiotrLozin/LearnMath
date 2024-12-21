@@ -1,9 +1,11 @@
 using LearnMath.Application;
+using LearnMath.Application.OpenStreetMap;
 using LearnMath.Application.Opinions;
 using LearnMath.Application.Students;
 using LearnMath.Application.Teachers;
 using LearnMath.Application.Users;
 using LearnMath.Infrastructure.DataAccess;
+using LearnMath.Infrastructure.ExternalApis;
 using LearnMath.Infrastructure.Opinions;
 using LearnMath.Infrastructure.Users;
 
@@ -19,6 +21,7 @@ builder.Services.AddDbContext<LearnMathContext>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IOpinionRepository, OpinionRepository>();
+builder.Services.AddScoped<IOpenStreetMapService, OpenStreetMapService>();
 
 builder.Services.AddMediatR(cfg => 
 {

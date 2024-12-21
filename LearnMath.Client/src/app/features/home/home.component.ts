@@ -1,5 +1,6 @@
 // home.component.ts
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  filters = { subject: '', city: '', minRating: null, maxDistance: null };
+  filters = { subject: '', city: '', postalCode: '', score: null, distance: null };
 
-  applyFilter() {
-    // Wysyła dane do app-teacher przez Input
+  constructor(private router: Router) {}
+  
+  onFilterApply(filters: any) {
+    this.router.navigate(['teacher-component'], { queryParams: filters });
   }
 }
