@@ -11,13 +11,18 @@ namespace LearnMath.Infrastructure.ExternalApis
 {
     public class OpenStreetMapService : IOpenStreetMapService
     {
+        private readonly HttpClient _httpClient;
+        public OpenStreetMapService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
         public async Task<Coordinates> GetCoordinates(string city, string? postalCode = null)
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "LearnMath/1.0 (testaplikacji@wp.pl)");
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "LearnMath/1.0 (testaplikacji@wp.pl)");
             string url = UrlBuilder(city, postalCode);
 
-            var response = await client.GetAsync(url);
+            var response = await _httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();

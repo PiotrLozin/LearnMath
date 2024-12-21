@@ -22,6 +22,10 @@ builder.Services.AddDbContext<LearnMathContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IOpinionRepository, OpinionRepository>();
 builder.Services.AddScoped<IOpenStreetMapService, OpenStreetMapService>();
+builder.Services.AddHttpClient<IOpenStreetMapService, OpenStreetMapService>(client =>
+{
+    client.BaseAddress = new Uri("https://nominatim.openstreetmap.org/search");
+});
 
 builder.Services.AddMediatR(cfg => 
 {
