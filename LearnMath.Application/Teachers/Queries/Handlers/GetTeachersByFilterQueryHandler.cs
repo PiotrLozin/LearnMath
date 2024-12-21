@@ -20,10 +20,12 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
     public class GetTeachersByFilterQueryHandler : IRequestHandler<GetTeachersByFilterQuery, GetAllTeacherResponse>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IOpenStreetMapService _openStreetMapService;
 
-        public GetTeachersByFilterQueryHandler(IUserRepository userRepository)
+        public GetTeachersByFilterQueryHandler(IUserRepository userRepository, IOpenStreetMapService openStreetMapService)
         {
             _userRepository = userRepository;
+            _openStreetMapService = openStreetMapService;
         }
 
         public async Task<GetAllTeacherResponse> Handle(GetTeachersByFilterQuery request, CancellationToken cancellationToken)
@@ -65,13 +67,13 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
             return new GetAllTeacherResponse(teachersDto);
         }
 
-        private static async Task<List<User>> GetUsersInRequestedDistance(
+        private async Task<List<User>> GetUsersInRequestedDistance(
             List<User> teachers,
             string city,
             string postalCode,
             int distance)
         {
-            Coordinates requestedCoordinates = await OsmExtension.GetCoordinates(city, postalCode);
+            Coordinates requestedCoordinates = await _openStreetMapService.GetCoordinates(city, postalCode);
             if (requestedCoordinates.Equals(new Coordinates(0, 0)))
             {
                 throw new ArgumentNullException("The specified address could not be found");
