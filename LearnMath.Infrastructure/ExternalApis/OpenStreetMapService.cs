@@ -20,7 +20,7 @@ namespace LearnMath.Infrastructure.ExternalApis
         public async Task<Coordinates> GetCoordinates(string city, string? postalCode = null)
         {
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "LearnMath/1.0 (testaplikacji@wp.pl)");
-            string url = UrlBuilder(city, postalCode);
+            string url = UrlBuilder(_httpClient.BaseAddress.ToString(), city, postalCode);
 
             var response = await _httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
@@ -49,10 +49,11 @@ namespace LearnMath.Infrastructure.ExternalApis
         /// <param name="postalCode"></param>
         /// <returns></returns>
         private static string UrlBuilder(
+            string baseAddress,
             string city,
             string? postalCode = null)
         {
-            string baseUrl = "https://nominatim.openstreetmap.org/search";
+            string baseUrl = baseAddress;
             string country = "Poland";
 
             // Użycie UriBuilder do składania URL
