@@ -22,4 +22,8 @@
     <ProjectReference Include="..\LearnMath.Domain\LearnMath.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ExternalApis\OpenStreetMap\" />
+  </ItemGroup>
+
 </Project>

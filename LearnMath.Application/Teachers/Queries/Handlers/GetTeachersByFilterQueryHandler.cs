@@ -1,4 +1,5 @@
 ﻿using LearnMath.Application.OpenStreetMap;
+using LearnMath.Application.OpenStreetMap.Queries;
 using LearnMath.Application.Teachers.MappingProfiles;
 using LearnMath.Application.Teachers.Responses;
 using LearnMath.Application.Users;
@@ -21,11 +22,16 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
     {
         private readonly IUserRepository _userRepository;
         private readonly IOpenStreetMapService _openStreetMapService;
+        private readonly IMediator _mediator;
 
-        public GetTeachersByFilterQueryHandler(IUserRepository userRepository, IOpenStreetMapService openStreetMapService)
+        public GetTeachersByFilterQueryHandler(
+            IUserRepository userRepository,
+            IOpenStreetMapService openStreetMapService,
+            IMediator mediator)
         {
             _userRepository = userRepository;
             _openStreetMapService = openStreetMapService;
+            _mediator = mediator;
         }
 
         public async Task<GetAllTeacherResponse> Handle(GetTeachersByFilterQuery request, CancellationToken cancellationToken)
@@ -73,7 +79,16 @@ namespace LearnMath.Application.Teachers.Queries.Handlers
             string postalCode,
             int distance)
         {
-            Coordinates requestedCoordinates = await _openStreetMapService.GetCoordinates(city, postalCode);
+            Coordinates requestedCoordinates;
+            try
+            {
+                requestedCoordinates = await _mediator.Send(new GetCoordinatesQuery(city, postalCode));
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Failed to retrieve coordinates from OpenStreetMap API.", ex);
+            }
+
             if (requestedCoordinates.Equals(new Coordinates(0, 0)))
             {
                 throw new ArgumentNullException("The specified address could not be found");
