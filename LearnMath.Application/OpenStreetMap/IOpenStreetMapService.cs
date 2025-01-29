@@ -8,6 +8,6 @@ namespace LearnMath.Application.OpenStreetMap
 {
     public interface IOpenStreetMapService
     {
-        Task<Coordinates> GetCoordinates(string city, string? postalCode = null);
+        Task<OSMResponseModel?> GetCoordinates(string city, string? postalCode = null);
     }
 }

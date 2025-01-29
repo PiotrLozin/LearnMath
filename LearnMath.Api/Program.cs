@@ -8,6 +8,7 @@ using LearnMath.Infrastructure.DataAccess;
 using LearnMath.Infrastructure.ExternalApis;
 using LearnMath.Infrastructure.Opinions;
 using LearnMath.Infrastructure.Users;
+using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,8 @@ builder.Services.AddScoped<IOpinionRepository, OpinionRepository>();
 builder.Services.AddScoped<IOpenStreetMapService, OpenStreetMapService>();
 builder.Services.AddHttpClient<IOpenStreetMapService, OpenStreetMapService>(client =>
 {
-    client.BaseAddress = new Uri("https://nominatim.openstreetmap.org/search");
+    client.DefaultRequestHeaders.Add("User-Agent", "LearnMath/1.0 (testaplikacji@wp.pl)");
+    client.BaseAddress = new Uri("https://nominatim.openstreetmap.org/");
 });
 
 builder.Services.AddMediatR(cfg => 

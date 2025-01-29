@@ -25,12 +25,12 @@ namespace LearnMath.Application.OpenStreetMap.Queries.Handlers
 
             var coordinates = await _openStreetMapService.GetCoordinates(request.City, request.PostalCode);
 
-            if (coordinates.Equals(new Coordinates(0, 0)))
+            if (coordinates is null || coordinates.Equals(new Coordinates(0, 0)))
             {
                 throw new InvalidOperationException("The specified address could not be resolved to coordinates.");
             }
 
-            return coordinates;
+            return new Coordinates(coordinates.Lat, coordinates.Lon);
         }
     }
 
