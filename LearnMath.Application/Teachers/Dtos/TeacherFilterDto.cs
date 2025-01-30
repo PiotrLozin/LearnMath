@@ -11,7 +11,8 @@ namespace LearnMath.Application.Teachers.Dtos
     {
         public Subject? Subject { get; set; } = null;
         public string? City { get; set; } = string.Empty;
-        public int Score { get; set; }
-        public int Distance { get; set; }
+        public string? PostalCode { get; set; } = string.Empty;
+        public int Score { get; set; } = 0;
+        public int Distance { get; set; } = 0;
     }
 }

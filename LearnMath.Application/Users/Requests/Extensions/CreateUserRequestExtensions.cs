@@ -1,6 +1,8 @@
 ﻿using LearnMath.Application.Addresses;
+using LearnMath.Application.OpenStreetMap;
 using LearnMath.Domain;
 using LearnMath.Domain.Enums;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,50 +14,43 @@ namespace LearnMath.Application.Users.Requests.Extensions
 {
     public static class CreateUserRequestExtensions
     {
-        public static User MapToUser(this CreateUserRequest request, UserType userType)
+        public static User MapToDBUser(this CreateUserRequest request, UserType userType, AddressDto address)
         {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            if (!Enum.IsDefined(typeof(Gender), request.Gender))
-            {
-                throw new ArgumentException($"Invalid gender value: {request.Gender}", nameof(request.Gender));
-            }
-
-            if (request.Subjects == null || !request.Subjects.All(s => Enum.IsDefined(typeof(Subject), s)))
-            {
-                throw new ArgumentException("Invalid subjects in the list.", nameof(request.Subjects));
-            }
-
             User userEntity = new User(
                 default,
                 request.FirstName,
                 request.LastName,
                 request.Email,
                 request.Gender,
-                request.Address.MapToAddress(),
+                address.MapToDBAddress(),
                 userType)
             {
-                UserSubjects = request.Subjects
-                    .Select(subject => new UserSubject { Subject = subject })
-                    .ToList()
+                UserSubjects = request.Subjects.MapToDBUserSubject()
             };
 
             return userEntity;
         }
 
-        public static Address MapToAddress(this AddressDto request)
+        public static Address MapToDBAddress(this AddressDto adressDto)
         {
             Address address = new Address(
                 Guid.Empty,
-                request.Street,
-                request.City,
-                request.Country,
-                request.PostCode);
+                adressDto.Street,
+                adressDto.City,
+                adressDto.Country,
+                adressDto.PostCode,
+                adressDto.Coordinates.Latitude,
+                adressDto.Coordinates.Longitude);
 
             return address;
         }
+
+        public static List<UserSubject> MapToDBUserSubject(this List<Subject> subjects) 
+        {
+            return subjects
+                    .Select(subject => new UserSubject { Subject = subject })
+                    .ToList();
+        }
+
     }
 }

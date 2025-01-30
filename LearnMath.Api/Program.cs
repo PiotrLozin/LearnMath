@@ -1,11 +1,14 @@
 using LearnMath.Application;
+using LearnMath.Application.OpenStreetMap;
 using LearnMath.Application.Opinions;
 using LearnMath.Application.Students;
 using LearnMath.Application.Teachers;
 using LearnMath.Application.Users;
 using LearnMath.Infrastructure.DataAccess;
+using LearnMath.Infrastructure.ExternalApis;
 using LearnMath.Infrastructure.Opinions;
 using LearnMath.Infrastructure.Users;
+using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +22,12 @@ builder.Services.AddDbContext<LearnMathContext>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IOpinionRepository, OpinionRepository>();
+builder.Services.AddScoped<IOpenStreetMapService, OpenStreetMapService>();
+builder.Services.AddHttpClient<IOpenStreetMapService, OpenStreetMapService>(client =>
+{
+    client.DefaultRequestHeaders.Add("User-Agent", "LearnMath/1.0 (testaplikacji@wp.pl)");
+    client.BaseAddress = new Uri("https://nominatim.openstreetmap.org/");
+});
 
 builder.Services.AddMediatR(cfg => 
 {

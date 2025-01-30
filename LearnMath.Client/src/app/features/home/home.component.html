@@ -1,10 +1,10 @@
 <!-- home.component.html -->
 <div class="teacher-filter-container">
-    <app-get-teachers-filter></app-get-teachers-filter>
+    <app-get-teachers-filter [filters]="filters" (onFilterApply)="onFilterApply($event)"></app-get-teachers-filter>
 </div>
 
-<!-- Komponent wyświetlający nauczycieli z przekazanymi filtrami  [filterCriteria]="filters"-->
+<!-- Komponent wyświetlający nauczycieli z przekazanymi filtrami  [filterCriteria]="filters"
 <div class="teacher-container">
     <h3>Znajdź nauczyciela</h3>
     <app-teacher></app-teacher>
-</div>
+</div> -->
