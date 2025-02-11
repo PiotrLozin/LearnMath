@@ -38,9 +38,7 @@ namespace LearnMath.Application.Users.Requests.Extensions
                 adressDto.Street,
                 adressDto.City,
                 adressDto.Country,
-                adressDto.PostCode,
-                adressDto.Coordinates.Latitude,
-                adressDto.Coordinates.Longitude);
+                adressDto.PostCode);
 
             return address;
         }

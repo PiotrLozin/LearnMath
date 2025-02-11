@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ExternalApis\OpenStreetMap\**" />
+    <EmbeddedResource Remove="ExternalApis\OpenStreetMap\**" />
+    <None Remove="ExternalApis\OpenStreetMap\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.31" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.31">
@@ -20,10 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\LearnMath.Application\LearnMath.Application.csproj" />
     <ProjectReference Include="..\LearnMath.Domain\LearnMath.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ExternalApis\OpenStreetMap\" />
   </ItemGroup>
 
 </Project>

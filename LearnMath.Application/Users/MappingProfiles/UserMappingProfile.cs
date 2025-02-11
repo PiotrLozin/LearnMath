@@ -16,9 +16,7 @@ namespace LearnMath.Application.Users.MappingProfiles
                 address.Street,
                 address.City,
                 address.Country,
-                address.PostCode,
-                address.Longitude,
-                address.Latitude);
+                address.PostCode);
 
             return addressDto;
         }
