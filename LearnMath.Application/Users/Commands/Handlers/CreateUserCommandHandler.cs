@@ -15,15 +15,12 @@ namespace LearnMath.Application.Users.Commands.Handlers
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
         private readonly IUserRepository _userRepository;
-        private readonly IOpenStreetMapService _openStreetMapService;
         private readonly IMediator _mediator;
         public CreateUserCommandHandler(
             IUserRepository userRepository,
-            IOpenStreetMapService openStreetMapService,
             IMediator mediator)
         {
             _userRepository = userRepository;
-            _openStreetMapService = openStreetMapService;
             _mediator = mediator;
         }
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
