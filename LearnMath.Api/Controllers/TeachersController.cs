@@ -61,7 +61,7 @@ namespace LearnMath.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(List<Teacher>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(List<TeacherDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> SaveTeacher([FromBody] CreateUserRequest request)
         {
@@ -72,7 +72,7 @@ namespace LearnMath.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(typeof(List<Teacher>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(List<TeacherDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> EditTeacher([FromBody] EditUserRequest request, int id)
         {
