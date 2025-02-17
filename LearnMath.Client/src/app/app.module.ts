@@ -27,6 +27,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { WebsitePresentationComponent } from './features/home-components/website-presentation/website-presentation.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     GetTeachersFilterComponent,
     RegisterTeacherComponent,
     EditTeacherComponent,
+    WebsitePresentationComponent,
     RegisterStudentComponent,
     AddressComponent,
     CreateOpinionComponent,
